@@ -14,13 +14,13 @@ This was created specifically with use on Windows XP in mind (WinForms API, not 
 
 It was inspired by a visual gag in [MJD's YouTube videos](https://www.youtube.com/c/MichaelMJD) where logos of software fly across the screen very quickly.
 
-The code is based on [https://www.codeproject.com/articles/4809/how-to-develop-a-screen-saver-in-c](How to develop a screen saver in C#) by Rakesh Rajan (2004).
+The code is based on [How to develop a screen saver in C#](https://www.codeproject.com/articles/4809/how-to-develop-a-screen-saver-in-c) by Rakesh Rajan (2004).
 
 ## Installation
 
 ### Supported operating systems
 
-Windows Vista, 7, 8, 8.1, 10 and 11.
+Windows Vista, 7, 8, 8.1, 10 and 11 (may require installing .NET 3.5).
 
 ### Supported operating systems (with .NET Framework 2.0 installed)
 
