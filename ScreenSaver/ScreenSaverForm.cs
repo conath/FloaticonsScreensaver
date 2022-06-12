@@ -1,12 +1,25 @@
 using System;
 using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace ScreenSaver
 {
 	public class ScreenSaverForm : Form
 	{
-		private System.ComponentModel.IContainer components;
+        [DllImport("user32.dll")]
+        static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
+
+        [DllImport("user32.dll")]
+        static extern int SetWindowLong(IntPtr hWnd, int nIndex, IntPtr dwNewLong);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+
+        [DllImport("user32.dll")]
+        static extern bool GetClientRect(IntPtr hWnd, out Rectangle lpRect);
+
+        private System.ComponentModel.IContainer components;
 		private Point MouseXY;
         private Image[] images = new Image[] {
             Properties.Resources.linux,
@@ -19,15 +32,40 @@ namespace ScreenSaver
             Properties.Resources.windows_8_10
         };
         private Timer timer;
-        private int ScreenNumber;
+        private readonly int screenNumber;
+        private readonly bool previewMode;
 
-		public ScreenSaverForm(int scrn)
-		{
-			InitializeComponent();
-			ScreenNumber = scrn;
-		}
+        public ScreenSaverForm(int scrn)
+        {
+            InitializeComponent();
+            screenNumber = scrn;
+            previewMode = false;
+        }
 
-		protected override void Dispose( bool disposing )
+        public ScreenSaverForm(IntPtr previewHandle)
+        {
+            InitializeComponent();
+            screenNumber = -1;
+            // running as small preview inside the screensaver control panel
+            previewMode = true;
+
+            // Set the preview window as the parent of this window
+            SetParent(this.Handle, previewHandle);
+
+            // Make this a child window so it will close when the parent dialog closes
+            // GWL_STYLE = -16, WS_CHILD = 0x40000000
+            SetWindowLong(this.Handle, -16, new IntPtr(GetWindowLong(this.Handle, -16) | 0x40000000));
+
+            // Place our window inside the parent
+            Rectangle ParentRect;
+            GetClientRect(previewHandle, out ParentRect);
+            Size = ParentRect.Size;
+            Location = new Point(0, 0);
+
+            // room for further behavior changes to allow useful preview
+        }
+
+        protected override void Dispose( bool disposing )
 		{
 			if( disposing )
 			{
@@ -41,9 +79,17 @@ namespace ScreenSaver
 
 		private void ScreenSaverForm_Load(object sender, System.EventArgs e)
 		{
-			this.Bounds = Screen.AllScreens[ScreenNumber].Bounds;
-			Cursor.Hide();
-			TopMost = true;
+            if (previewMode)
+            {
+                /// bounds configured in the constructor
+            }
+            else
+            {
+			    this.Bounds = Screen.AllScreens[screenNumber].Bounds;
+			    Cursor.Hide();
+			    TopMost = true;
+            }
+
             timer.Tick += Timer1_Tick;
             timer.Start();
             Randomize();
@@ -101,10 +147,14 @@ namespace ScreenSaver
 		}
         #endregion
 
-        private const int XStartLeft = -256;
-        private int XStartRight => Width + 128;
-        private int MinYPos => -128;
-        private int MaxYPos => Height + 128;
+        private int IconWidth => previewMode ? 32 : 128;
+        private int IconHeight => previewMode ? 32 : 128;
+        private int XSpeed => IconWidth / 9;
+        private int XStartLeft => -2 * IconWidth;
+        private int XStartRight => Width + IconWidth;
+        private int MinYPos => -IconHeight;
+        private int MaxYPos => Height + IconHeight;
+        private int YSpeed => IconHeight / 16;
 
         private Random random = new Random();
 
@@ -129,7 +179,10 @@ namespace ScreenSaver
             e.Graphics.TranslateTransform(xPos, yPos);
             float newRot = xPos / rotationDivident + angleOffset;
             e.Graphics.RotateTransform((int)Math.Round(newRot), System.Drawing.Drawing2D.MatrixOrder.Prepend);
-            e.Graphics.DrawImage(images[imageIndex], 0, 0, 128, 128);
+            if (previewMode)
+                e.Graphics.DrawImage(images[imageIndex], 0, 0, IconWidth, IconHeight);
+            else
+                e.Graphics.DrawImage(images[imageIndex], 0, 0, IconWidth, IconHeight);
         }
 
         private void Randomize()
@@ -139,16 +192,19 @@ namespace ScreenSaver
             xPos = startLeft ? XStartLeft : XStartRight;
             if (startLeft)
                 config -= 5;
-            speed.X = startLeft ? 15 : -15;
+            speed.X = startLeft ? XSpeed : -XSpeed;
             yPos = MinYPos + (config + 1) * Height / 5;
-            speed.Y = random.Next(8);
+            speed.Y = random.Next(YSpeed);
             speed.Y *= config > 2 ? -1 : 1;
             // different random image
             int imageI = imageIndex;
             while (imageIndex == imageI)
                 imageIndex = random.Next(images.Length);
             // Random delay
-            DelaySeconds = random.Next(6);
+            if (previewMode)
+                DelaySeconds = random.Next(2); // less delay in Preview mode
+            else
+                DelaySeconds = random.Next(6);
         }
 
         private void Timer1_Tick(object sender, EventArgs e)

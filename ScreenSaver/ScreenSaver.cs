@@ -59,7 +59,8 @@ namespace ScreenSaver
 
         private static void RunPreview(string firstArgument, string secondArgument)
         {
-            // TODO
+            IntPtr previewWndHandle = new IntPtr(long.Parse(secondArgument));
+            Application.Run(new ScreenSaverForm(previewWndHandle));
         }
 	}
 }

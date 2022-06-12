@@ -156,6 +156,6 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent />
-    <PostBuildEvent />
+    <PostBuildEvent>copy "$(TargetPath)" "$(ProjectDir)\bin\Floaticons.scr"</PostBuildEvent>
   </PropertyGroup>
 </Project>
