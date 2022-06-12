@@ -19,14 +19,12 @@ namespace ScreenSaver
 				}
 				else if (arg == "/s") // preview?
 				{
-					for (int i = Screen.AllScreens.GetLowerBound(0); i <= Screen.AllScreens.GetUpperBound(0); i++) 
-						Application.Run(new ScreenSaverForm(i));				
+					Application.Run(new SCApplicationContext());				
 				}
 			}
 			else // run normally
 			{
-				for (int i = Screen.AllScreens.GetLowerBound(0); i <= Screen.AllScreens.GetUpperBound(0); i++) 
-					Application.Run(new ScreenSaverForm(i));				
+				Application.Run(new SCApplicationContext());				
 			}
 		}
 	}
