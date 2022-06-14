@@ -98,7 +98,7 @@ namespace ScreenSaver
 
         private void OnMouseEvent(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-			if (!MouseXY.IsEmpty)
+			if (!previewMode && !MouseXY.IsEmpty)
 			{
 				if (MouseXY != new Point(e.X, e.Y))
 					Close();
@@ -110,7 +110,10 @@ namespace ScreenSaver
 		
 		private void ScreenSaverForm_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
 		{
-			Close();
+            if (!previewMode)
+            {
+                Close();
+            }
 		}
 
 		#region Windows Form Designer generated code
