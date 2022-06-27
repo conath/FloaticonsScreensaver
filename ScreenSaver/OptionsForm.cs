@@ -5,14 +5,18 @@ namespace ScreenSaver
 {
     public partial class OptionsForm : Form
     {
+        private Settings settings;
+
         public OptionsForm()
         {
             InitializeComponent();
+            settings = Settings.Load();
         }
 
         private void OptionsForm_Load(object sender, EventArgs e)
         {
-
+            rotationEffect.Checked = settings.rotationEffect;
+            applyButton.Enabled = false;
         }
         
         private void VisitLink()
@@ -35,6 +39,34 @@ namespace ScreenSaver
             {
                 MessageBox.Show("Unable to open link.\rn" + ex.Message);
             }
+        }
+
+        private void rotationEffect_CheckedChanged(object sender, EventArgs e)
+        {
+            settings.rotationEffect = rotationEffect.Checked;
+            applyButton.Enabled = true;
+        }
+
+        private void OptionsForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // ask to save?
+        }
+
+        private void okButton_Click(object sender, EventArgs e)
+        {
+            settings.Save();
+            Close();
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void applyButton_Click(object sender, EventArgs e)
+        {
+            settings.Save();
+            applyButton.Enabled = false;
         }
     }
 }

@@ -150,6 +150,8 @@ namespace ScreenSaver
 		}
         #endregion
 
+        private Settings settings = Settings.Load();
+
         private int IconWidth => previewMode ? 32 : 128;
         private int IconHeight => previewMode ? 32 : 128;
         private int XSpeed => IconWidth / 9;
@@ -180,8 +182,11 @@ namespace ScreenSaver
             base.OnPaint(e);
             e.Graphics.Clear(Color.Black);
             e.Graphics.TranslateTransform(xPos, yPos);
-            float newRot = xPos / rotationDivident + angleOffset;
-            e.Graphics.RotateTransform((int)Math.Round(newRot), System.Drawing.Drawing2D.MatrixOrder.Prepend);
+            if (settings.rotationEffect)
+            {
+                float newRot = xPos / rotationDivident + angleOffset;
+                e.Graphics.RotateTransform((int)Math.Round(newRot), System.Drawing.Drawing2D.MatrixOrder.Prepend);
+            }
             if (previewMode)
                 e.Graphics.DrawImage(images[imageIndex], 0, 0, IconWidth, IconHeight);
             else
