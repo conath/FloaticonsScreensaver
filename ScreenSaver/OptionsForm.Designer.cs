@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.Label speedSliderLabel;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OptionsForm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.generalTabPage = new System.Windows.Forms.TabPage();
             this.generalFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
@@ -343,6 +344,7 @@
             this.ClientSize = new System.Drawing.Size(368, 474);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.tabControl1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "OptionsForm";
             this.Padding = new System.Windows.Forms.Padding(6);
             this.Text = "Floaticons Options";
