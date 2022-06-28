@@ -154,11 +154,11 @@ namespace ScreenSaver
 
         private int IconWidth => previewMode ? 32 : 128;
         private int IconHeight => previewMode ? 32 : 128;
-        private int XSpeed => IconWidth / 9;
+        private int XSpeed => previewMode ? 2 : settings.moveSpeedX + 5; // default: width / 9 = 14
         private int XStartLeft => -2 * IconWidth;
         private int XStartRight => Width + IconWidth;
-        private int MinYPos => -IconHeight;
-        private int MaxYPos => Height + IconHeight;
+        private int MinYPos => settings.moveY ? -IconHeight : 0;
+        private int MaxYPos => settings.moveY ? Height + IconHeight : Height - IconHeight;
         private int YSpeed => IconHeight / 16;
 
         private Random random = new Random();
@@ -195,15 +195,25 @@ namespace ScreenSaver
 
         private void Randomize()
         {
+            // randomly choose a starting position
+            // 0-4 means start on the left, 5-9 means start on the right
             int config = random.Next(10);
             bool startLeft = config > 4;
             xPos = startLeft ? XStartLeft : XStartRight;
             if (startLeft)
                 config -= 5;
+            // determine parameters from configuration
             speed.X = startLeft ? XSpeed : -XSpeed;
             yPos = MinYPos + (config + 1) * Height / 5;
-            speed.Y = random.Next(YSpeed);
-            speed.Y *= config > 2 ? -1 : 1;
+            if (settings.moveY)
+            {
+                speed.Y = random.Next(YSpeed);
+                speed.Y *= config > 2 ? -1 : 1;
+            }
+            else
+            {
+                speed.Y = 0;
+            }
             // different random image
             int imageI = imageIndex;
             while (imageIndex == imageI)
