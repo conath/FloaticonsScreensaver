@@ -107,6 +107,11 @@
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Properties\WindowsIcons.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WindowsIcons.resx</DependentUpon>
+    </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="OptionsForm.cs">
       <SubType>Form</SubType>
@@ -127,6 +132,17 @@
       <SubType>Form</SubType>
     </Compile>
     <Content Include="App.ico" />
+    <Content Include="Resources\Windows\10.png" />
+    <Content Include="Resources\Windows\2000.png" />
+    <Content Include="Resources\Windows\3_0.png" />
+    <Content Include="Resources\Windows\8.png" />
+    <Content Include="Resources\Windows\95_98.png" />
+    <Content Include="Resources\Windows\ME.png" />
+    <Content Include="Resources\Windows\Vista.png" />
+    <None Include="Resources\Windows\11.png" />
+    <None Include="Resources\Windows\xp.png" />
+    <None Include="Resources\Windows\3_1_etc.png" />
+    <None Include="Resources\Windows\7.png" />
     <None Include="Resources\windows_2003_xp.png" />
     <None Include="Resources\windows_11.png" />
     <None Include="Resources\windows_8_10.png" />
@@ -142,6 +158,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\WindowsIcons.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>WindowsIcons.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ScreenSaverForm.resx">
       <DependentUpon>ScreenSaverForm.cs</DependentUpon>

@@ -1,11 +1,41 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace ScreenSaver
 {
     public partial class OptionsForm : Form
     {
+        private readonly string[] windowsIconNames = new string[]
+        {
+            "Windows 3.0",
+            "Windows 3.1 etc.",
+            "Windows 95-98",
+            "Windows 2000",
+            "Windows ME",
+            "Windows XP",
+            "Windows Vista",
+            "Windows 7",
+            "Windows 8 / 8.1",
+            "Windows 10",
+            "Windows 11"
+        };
+
+        private Image[] windowsImages = new Image[] {
+            Properties.WindowsIcons._3_0,
+            Properties.WindowsIcons._3_1_etc,
+            Properties.WindowsIcons._95_98,
+            Properties.WindowsIcons._2000,
+            Properties.WindowsIcons.ME,
+            Properties.WindowsIcons.XP,
+            Properties.WindowsIcons.Vista,
+            Properties.WindowsIcons._7,
+            Properties.WindowsIcons._8,
+            Properties.WindowsIcons._10,
+            Properties.WindowsIcons._11
+        };
+
         private Settings settings;
 
         public OptionsForm()
@@ -19,6 +49,8 @@ namespace ScreenSaver
             rotationEffectCheckBox.Checked = settings.rotationEffect;
             verticalMovementCheckBox.Checked = settings.moveY;
             animationSpeedSlider.Value = settings.moveSpeedX;
+            iconsCheckedListBox.Items.AddRange(windowsIconNames);
+            iconsCheckedListBox.ItemCheck += iconsCheckedListBox_ItemCheck;
         }
         
         private void VisitLink()
@@ -26,8 +58,8 @@ namespace ScreenSaver
             // Change the color of the link text by setting LinkVisited
             // to true.
             linkLabel1.LinkVisited = true;
-            //Call the Process.Start method to open the default browser
-            //with a URL:
+            // Call the Process.Start method to open the default browser
+            // with a URL:
             Process.Start("https://github.com/conath/FloaticonsScreensaver/");
         }
 
@@ -85,6 +117,27 @@ namespace ScreenSaver
         private void verticalMovementCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             settings.moveY = verticalMovementCheckBox.Checked;
+        }
+        
+        /// <summary>
+        /// Invoked when an icon is checked or unchecked.
+        /// </summary>
+        private void iconsCheckedListBox_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            int index = e.Index;
+            CheckState newCheckValue = e.NewValue;
+            CheckState currentValue = e.CurrentValue;
+            Console.WriteLine($"Index {index}, newValue {(newCheckValue == CheckState.Checked ? "true" : "false")}");
+        }
+
+        /// <summary>
+        /// Invoked when an icon row is highlighted (selected)
+        /// </summary>
+        private void iconsCheckedListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // show icon on right side?
+            Console.WriteLine($"Index {iconsCheckedListBox.SelectedIndex}");
+            logoPreviewImage.Image = windowsImages[iconsCheckedListBox.SelectedIndex];
         }
     }
 }

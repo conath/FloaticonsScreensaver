@@ -41,6 +41,9 @@
             this.verticalMovementCheckBox = new System.Windows.Forms.CheckBox();
             this.rotationEffectCheckBox = new System.Windows.Forms.CheckBox();
             this.iconsTabPage = new System.Windows.Forms.TabPage();
+            this.iconsFlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.prefabGroupBox = new System.Windows.Forms.GroupBox();
+            this.iconsCheckedListBox = new System.Windows.Forms.CheckedListBox();
             this.todoLabel = new System.Windows.Forms.Label();
             this.aboutTabPage = new System.Windows.Forms.TabPage();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
@@ -51,6 +54,8 @@
             this.cancelButton = new System.Windows.Forms.Button();
             this.okButton = new System.Windows.Forms.Button();
             this.previewProcess = new System.Diagnostics.Process();
+            this.logoPreviewImage = new System.Windows.Forms.PictureBox();
+            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             speedSliderLabel = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.generalTabPage.SuspendLayout();
@@ -59,9 +64,13 @@
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.animationSpeedSlider)).BeginInit();
             this.iconsTabPage.SuspendLayout();
+            this.iconsFlowLayoutPanel.SuspendLayout();
+            this.prefabGroupBox.SuspendLayout();
             this.aboutTabPage.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.logoPreviewImage)).BeginInit();
+            this.flowLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // speedSliderLabel
@@ -210,6 +219,7 @@
             // 
             // iconsTabPage
             // 
+            this.iconsTabPage.Controls.Add(this.iconsFlowLayoutPanel);
             this.iconsTabPage.Controls.Add(this.todoLabel);
             this.iconsTabPage.Location = new System.Drawing.Point(4, 22);
             this.iconsTabPage.Name = "iconsTabPage";
@@ -218,6 +228,43 @@
             this.iconsTabPage.TabIndex = 1;
             this.iconsTabPage.Text = "Icons";
             this.iconsTabPage.UseVisualStyleBackColor = true;
+            // 
+            // iconsFlowLayoutPanel
+            // 
+            this.iconsFlowLayoutPanel.AutoSize = true;
+            this.iconsFlowLayoutPanel.Controls.Add(this.flowLayoutPanel3);
+            this.iconsFlowLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.iconsFlowLayoutPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.iconsFlowLayoutPanel.Location = new System.Drawing.Point(3, 3);
+            this.iconsFlowLayoutPanel.Name = "iconsFlowLayoutPanel";
+            this.iconsFlowLayoutPanel.Size = new System.Drawing.Size(342, 404);
+            this.iconsFlowLayoutPanel.TabIndex = 1;
+            // 
+            // prefabGroupBox
+            // 
+            this.prefabGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.prefabGroupBox.Controls.Add(this.iconsCheckedListBox);
+            this.prefabGroupBox.Location = new System.Drawing.Point(3, 3);
+            this.prefabGroupBox.MinimumSize = new System.Drawing.Size(160, 160);
+            this.prefabGroupBox.Name = "prefabGroupBox";
+            this.prefabGroupBox.Size = new System.Drawing.Size(160, 160);
+            this.prefabGroupBox.TabIndex = 0;
+            this.prefabGroupBox.TabStop = false;
+            this.prefabGroupBox.Text = "Windows Operating Systems";
+            // 
+            // iconsCheckedListBox
+            // 
+            this.iconsCheckedListBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.iconsCheckedListBox.CheckOnClick = true;
+            this.iconsCheckedListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.iconsCheckedListBox.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.iconsCheckedListBox.FormattingEnabled = true;
+            this.iconsCheckedListBox.Location = new System.Drawing.Point(3, 16);
+            this.iconsCheckedListBox.Name = "iconsCheckedListBox";
+            this.iconsCheckedListBox.Size = new System.Drawing.Size(154, 141);
+            this.iconsCheckedListBox.TabIndex = 0;
+            this.iconsCheckedListBox.SelectedIndexChanged += new System.EventHandler(this.iconsCheckedListBox_SelectedIndexChanged);
             // 
             // todoLabel
             // 
@@ -337,6 +384,30 @@
             this.previewProcess.StartInfo.WorkingDirectory = ".\\";
             this.previewProcess.SynchronizingObject = this;
             // 
+            // logoPreviewImage
+            // 
+            this.logoPreviewImage.Image = ((System.Drawing.Image)(resources.GetObject("logoPreviewImage.Image")));
+            this.logoPreviewImage.InitialImage = global::ScreenSaver.Properties.Resources.ubuntu;
+            this.logoPreviewImage.Location = new System.Drawing.Point(182, 20);
+            this.logoPreviewImage.Margin = new System.Windows.Forms.Padding(16, 20, 16, 16);
+            this.logoPreviewImage.MaximumSize = new System.Drawing.Size(128, 128);
+            this.logoPreviewImage.MinimumSize = new System.Drawing.Size(128, 128);
+            this.logoPreviewImage.Name = "logoPreviewImage";
+            this.logoPreviewImage.Size = new System.Drawing.Size(128, 128);
+            this.logoPreviewImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.logoPreviewImage.TabIndex = 1;
+            this.logoPreviewImage.TabStop = false;
+            // 
+            // flowLayoutPanel3
+            // 
+            this.flowLayoutPanel3.Controls.Add(this.prefabGroupBox);
+            this.flowLayoutPanel3.Controls.Add(this.logoPreviewImage);
+            this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Left;
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(336, 168);
+            this.flowLayoutPanel3.TabIndex = 2;
+            // 
             // OptionsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -345,6 +416,8 @@
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(384, 512);
+            this.MinimumSize = new System.Drawing.Size(384, 512);
             this.Name = "OptionsForm";
             this.Padding = new System.Windows.Forms.Padding(6);
             this.Text = "Floaticons Options";
@@ -362,10 +435,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.animationSpeedSlider)).EndInit();
             this.iconsTabPage.ResumeLayout(false);
             this.iconsTabPage.PerformLayout();
+            this.iconsFlowLayoutPanel.ResumeLayout(false);
+            this.prefabGroupBox.ResumeLayout(false);
             this.aboutTabPage.ResumeLayout(false);
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel2.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.logoPreviewImage)).EndInit();
+            this.flowLayoutPanel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -393,5 +470,10 @@
         private System.Windows.Forms.CheckBox verticalMovementCheckBox;
         private System.Windows.Forms.Button okButton;
         private System.Diagnostics.Process previewProcess;
+        private System.Windows.Forms.FlowLayoutPanel iconsFlowLayoutPanel;
+        private System.Windows.Forms.GroupBox prefabGroupBox;
+        private System.Windows.Forms.CheckedListBox iconsCheckedListBox;
+        private System.Windows.Forms.PictureBox logoPreviewImage;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
     }
 }
