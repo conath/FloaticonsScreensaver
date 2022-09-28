@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace ScreenSaver
@@ -10,10 +11,15 @@ namespace ScreenSaver
         public bool rotationEffect = true;
         public int moveSpeedX = 9; // range 0-10
         public bool moveY = true;
+
+        private Dictionary<string, bool> iconEnableState = new Dictionary<string, bool>();
+
+        private const bool IconDefaultState = true;
         #endregion
 
         #region Loading and storing data
         private const string REGISTRY_SUBKEY = "Software\\Floaticons Screensaver";
+        private const string ICONS_SUBKEY = "\\Icon State";
         private const string NAME_ROTATION = "RotationEffect";
         private const string NAME_XSPEED = "XMovementSpeed";
         private const string NAME_YMOVE = "YMovement";
@@ -23,10 +29,11 @@ namespace ScreenSaver
 
         public static Settings Load()
         {
-            RegistryKey key = Registry.CurrentUser.OpenSubKey(REGISTRY_SUBKEY);
-            try
+            var instance = new Settings();
+            RegistryKey key = null;
+            void LoadMainSettings()
             {
-                var instance = new Settings();
+                key = Registry.CurrentUser.OpenSubKey(REGISTRY_SUBKEY);
                 if (key == null)
                 {
                     // default settings
@@ -38,27 +45,79 @@ namespace ScreenSaver
                     instance.moveSpeedX = (int)key.GetValue(NAME_XSPEED, 1);
                     instance.moveY = (int)key.GetValue(NAME_YMOVE, 1) == 1;
                 }
-                return instance;
+            }
+            void LoadIconSettings()
+            {
+                if (key != null)
+                    key.Close();
+                key = Registry.CurrentUser.OpenSubKey(REGISTRY_SUBKEY + ICONS_SUBKEY);
+                if (key == null)
+                {
+                    // default settings
+                    foreach (var name in Strings.AllIconNames)
+                    {
+                        instance.SetIconEnabled(name, IconDefaultState);
+                    }
+                }
+                else
+                {
+                    // read settings
+                    foreach (var name in Strings.AllIconNames)
+                    {
+                        bool state = 1 == (int)key.GetValue(name, defaultValue: IconDefaultState);
+                        instance.SetIconEnabled(name, state);
+                    }
+                }
+            }
+
+            try
+            {
+                LoadMainSettings();
+                LoadIconSettings();
             }
             catch (InvalidCastException e)
             {
                 MessageBox.Show("Can't load registry keys.");
-                throw e;
+                // default settings
+                foreach (var name in Strings.AllIconNames)
+                {
+                    instance.SetIconEnabled(name, IconDefaultState);
+                }
             }
             finally
             {
                 if (key != null)
                     key.Close();
             }
+            return instance;
+        }
+
+        public bool IsIconEnabled(string name)
+        {
+            if (iconEnableState.TryGetValue(name, out bool result))
+                return result;
+            else
+                return IconDefaultState;
+        }
+
+        public void SetIconEnabled(string name, bool state)
+        {
+            iconEnableState[name] = state;
         }
 
         public void Save()
         {
-            RegistryKey key = Registry.CurrentUser.CreateSubKey(REGISTRY_SUBKEY);
-            key.SetValue(NAME_ROTATION, rotationEffect ? 1 : 0);
-            key.SetValue(NAME_XSPEED, moveSpeedX);
-            key.SetValue(NAME_YMOVE, moveY ? 1 : 0);
-            key.Close();
+            RegistryKey mainKey = Registry.CurrentUser.CreateSubKey(REGISTRY_SUBKEY);
+            mainKey.SetValue(NAME_ROTATION, rotationEffect ? 1 : 0);
+            mainKey.SetValue(NAME_XSPEED, moveSpeedX);
+            mainKey.SetValue(NAME_YMOVE, moveY ? 1 : 0);
+            mainKey.Close();
+            RegistryKey iconsKey = Registry.CurrentUser.CreateSubKey(REGISTRY_SUBKEY + ICONS_SUBKEY);
+            foreach (var name in iconEnableState.Keys)
+            {
+                iconsKey.SetValue(name, iconEnableState[name] ? 1 : 0);
+            }
+            iconsKey.Close();
         }
         #endregion
     }

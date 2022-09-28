@@ -42,8 +42,14 @@
             this.rotationEffectCheckBox = new System.Windows.Forms.CheckBox();
             this.iconsTabPage = new System.Windows.Forms.TabPage();
             this.iconsFlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.WindowsIconsCheckList = new System.Windows.Forms.CheckedListBox();
+            this.windowsPreviewImage = new System.Windows.Forms.PictureBox();
+            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.prefabGroupBox = new System.Windows.Forms.GroupBox();
-            this.iconsCheckedListBox = new System.Windows.Forms.CheckedListBox();
+            this.LinuxIconsCheckList = new System.Windows.Forms.CheckedListBox();
+            this.linuxPreviewImage = new System.Windows.Forms.PictureBox();
             this.todoLabel = new System.Windows.Forms.Label();
             this.aboutTabPage = new System.Windows.Forms.TabPage();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
@@ -54,8 +60,6 @@
             this.cancelButton = new System.Windows.Forms.Button();
             this.okButton = new System.Windows.Forms.Button();
             this.previewProcess = new System.Diagnostics.Process();
-            this.logoPreviewImage = new System.Windows.Forms.PictureBox();
-            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             speedSliderLabel = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.generalTabPage.SuspendLayout();
@@ -65,12 +69,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.animationSpeedSlider)).BeginInit();
             this.iconsTabPage.SuspendLayout();
             this.iconsFlowLayoutPanel.SuspendLayout();
+            this.flowLayoutPanel5.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.windowsPreviewImage)).BeginInit();
+            this.flowLayoutPanel3.SuspendLayout();
             this.prefabGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.linuxPreviewImage)).BeginInit();
             this.aboutTabPage.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.logoPreviewImage)).BeginInit();
-            this.flowLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // speedSliderLabel
@@ -232,6 +239,7 @@
             // iconsFlowLayoutPanel
             // 
             this.iconsFlowLayoutPanel.AutoSize = true;
+            this.iconsFlowLayoutPanel.Controls.Add(this.flowLayoutPanel5);
             this.iconsFlowLayoutPanel.Controls.Add(this.flowLayoutPanel3);
             this.iconsFlowLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.iconsFlowLayoutPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
@@ -240,31 +248,105 @@
             this.iconsFlowLayoutPanel.Size = new System.Drawing.Size(342, 404);
             this.iconsFlowLayoutPanel.TabIndex = 1;
             // 
+            // flowLayoutPanel5
+            // 
+            this.flowLayoutPanel5.AutoSize = true;
+            this.flowLayoutPanel5.Controls.Add(this.groupBox3);
+            this.flowLayoutPanel5.Controls.Add(this.windowsPreviewImage);
+            this.flowLayoutPanel5.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanel5.Name = "flowLayoutPanel5";
+            this.flowLayoutPanel5.Size = new System.Drawing.Size(330, 166);
+            this.flowLayoutPanel5.TabIndex = 3;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Controls.Add(this.WindowsIconsCheckList);
+            this.groupBox3.Location = new System.Drawing.Point(3, 3);
+            this.groupBox3.MinimumSize = new System.Drawing.Size(160, 160);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(160, 160);
+            this.groupBox3.TabIndex = 0;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Windows Operating Systems";
+            // 
+            // WindowsIconsCheckList
+            // 
+            this.WindowsIconsCheckList.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.WindowsIconsCheckList.CheckOnClick = true;
+            this.WindowsIconsCheckList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.WindowsIconsCheckList.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.WindowsIconsCheckList.FormattingEnabled = true;
+            this.WindowsIconsCheckList.Location = new System.Drawing.Point(3, 16);
+            this.WindowsIconsCheckList.Name = "WindowsIconsCheckList";
+            this.WindowsIconsCheckList.Size = new System.Drawing.Size(154, 141);
+            this.WindowsIconsCheckList.TabIndex = 0;
+            this.WindowsIconsCheckList.SelectedIndexChanged += new System.EventHandler(this.WindowsIconsCheckedListBox_SelectedIndexChanged);
+            // 
+            // windowsPreviewImage
+            // 
+            this.windowsPreviewImage.Image = ((System.Drawing.Image)(resources.GetObject("windowsPreviewImage.Image")));
+            this.windowsPreviewImage.InitialImage = global::ScreenSaver.Properties.Resources.ubuntu;
+            this.windowsPreviewImage.Location = new System.Drawing.Point(186, 20);
+            this.windowsPreviewImage.Margin = new System.Windows.Forms.Padding(20, 20, 16, 16);
+            this.windowsPreviewImage.MaximumSize = new System.Drawing.Size(128, 128);
+            this.windowsPreviewImage.MinimumSize = new System.Drawing.Size(128, 128);
+            this.windowsPreviewImage.Name = "windowsPreviewImage";
+            this.windowsPreviewImage.Size = new System.Drawing.Size(128, 128);
+            this.windowsPreviewImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.windowsPreviewImage.TabIndex = 1;
+            this.windowsPreviewImage.TabStop = false;
+            // 
+            // flowLayoutPanel3
+            // 
+            this.flowLayoutPanel3.Controls.Add(this.prefabGroupBox);
+            this.flowLayoutPanel3.Controls.Add(this.linuxPreviewImage);
+            this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Left;
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(3, 175);
+            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(336, 168);
+            this.flowLayoutPanel3.TabIndex = 2;
+            // 
             // prefabGroupBox
             // 
             this.prefabGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.prefabGroupBox.Controls.Add(this.iconsCheckedListBox);
+            this.prefabGroupBox.Controls.Add(this.LinuxIconsCheckList);
             this.prefabGroupBox.Location = new System.Drawing.Point(3, 3);
             this.prefabGroupBox.MinimumSize = new System.Drawing.Size(160, 160);
             this.prefabGroupBox.Name = "prefabGroupBox";
             this.prefabGroupBox.Size = new System.Drawing.Size(160, 160);
             this.prefabGroupBox.TabIndex = 0;
             this.prefabGroupBox.TabStop = false;
-            this.prefabGroupBox.Text = "Windows Operating Systems";
+            this.prefabGroupBox.Text = "Linux Operating Systems";
             // 
-            // iconsCheckedListBox
+            // LinuxIconsCheckList
             // 
-            this.iconsCheckedListBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.iconsCheckedListBox.CheckOnClick = true;
-            this.iconsCheckedListBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.iconsCheckedListBox.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.iconsCheckedListBox.FormattingEnabled = true;
-            this.iconsCheckedListBox.Location = new System.Drawing.Point(3, 16);
-            this.iconsCheckedListBox.Name = "iconsCheckedListBox";
-            this.iconsCheckedListBox.Size = new System.Drawing.Size(154, 141);
-            this.iconsCheckedListBox.TabIndex = 0;
-            this.iconsCheckedListBox.SelectedIndexChanged += new System.EventHandler(this.iconsCheckedListBox_SelectedIndexChanged);
+            this.LinuxIconsCheckList.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.LinuxIconsCheckList.CheckOnClick = true;
+            this.LinuxIconsCheckList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LinuxIconsCheckList.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.LinuxIconsCheckList.FormattingEnabled = true;
+            this.LinuxIconsCheckList.Location = new System.Drawing.Point(3, 16);
+            this.LinuxIconsCheckList.Name = "LinuxIconsCheckList";
+            this.LinuxIconsCheckList.Size = new System.Drawing.Size(154, 141);
+            this.LinuxIconsCheckList.TabIndex = 0;
+            this.LinuxIconsCheckList.SelectedIndexChanged += new System.EventHandler(this.LinuxIconsCheckedListBox_SelectedIndexChanged);
+            // 
+            // linuxPreviewImage
+            // 
+            this.linuxPreviewImage.Image = ((System.Drawing.Image)(resources.GetObject("linuxPreviewImage.Image")));
+            this.linuxPreviewImage.InitialImage = global::ScreenSaver.Properties.Resources.ubuntu;
+            this.linuxPreviewImage.Location = new System.Drawing.Point(186, 20);
+            this.linuxPreviewImage.Margin = new System.Windows.Forms.Padding(20, 20, 16, 16);
+            this.linuxPreviewImage.MaximumSize = new System.Drawing.Size(128, 128);
+            this.linuxPreviewImage.MinimumSize = new System.Drawing.Size(128, 128);
+            this.linuxPreviewImage.Name = "linuxPreviewImage";
+            this.linuxPreviewImage.Size = new System.Drawing.Size(128, 128);
+            this.linuxPreviewImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.linuxPreviewImage.TabIndex = 1;
+            this.linuxPreviewImage.TabStop = false;
             // 
             // todoLabel
             // 
@@ -384,30 +466,6 @@
             this.previewProcess.StartInfo.WorkingDirectory = ".\\";
             this.previewProcess.SynchronizingObject = this;
             // 
-            // logoPreviewImage
-            // 
-            this.logoPreviewImage.Image = ((System.Drawing.Image)(resources.GetObject("logoPreviewImage.Image")));
-            this.logoPreviewImage.InitialImage = global::ScreenSaver.Properties.Resources.ubuntu;
-            this.logoPreviewImage.Location = new System.Drawing.Point(182, 20);
-            this.logoPreviewImage.Margin = new System.Windows.Forms.Padding(16, 20, 16, 16);
-            this.logoPreviewImage.MaximumSize = new System.Drawing.Size(128, 128);
-            this.logoPreviewImage.MinimumSize = new System.Drawing.Size(128, 128);
-            this.logoPreviewImage.Name = "logoPreviewImage";
-            this.logoPreviewImage.Size = new System.Drawing.Size(128, 128);
-            this.logoPreviewImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.logoPreviewImage.TabIndex = 1;
-            this.logoPreviewImage.TabStop = false;
-            // 
-            // flowLayoutPanel3
-            // 
-            this.flowLayoutPanel3.Controls.Add(this.prefabGroupBox);
-            this.flowLayoutPanel3.Controls.Add(this.logoPreviewImage);
-            this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(3, 3);
-            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(336, 168);
-            this.flowLayoutPanel3.TabIndex = 2;
-            // 
             // OptionsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -436,13 +494,17 @@
             this.iconsTabPage.ResumeLayout(false);
             this.iconsTabPage.PerformLayout();
             this.iconsFlowLayoutPanel.ResumeLayout(false);
+            this.iconsFlowLayoutPanel.PerformLayout();
+            this.flowLayoutPanel5.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.windowsPreviewImage)).EndInit();
+            this.flowLayoutPanel3.ResumeLayout(false);
             this.prefabGroupBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.linuxPreviewImage)).EndInit();
             this.aboutTabPage.ResumeLayout(false);
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel2.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.logoPreviewImage)).EndInit();
-            this.flowLayoutPanel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -472,8 +534,12 @@
         private System.Diagnostics.Process previewProcess;
         private System.Windows.Forms.FlowLayoutPanel iconsFlowLayoutPanel;
         private System.Windows.Forms.GroupBox prefabGroupBox;
-        private System.Windows.Forms.CheckedListBox iconsCheckedListBox;
-        private System.Windows.Forms.PictureBox logoPreviewImage;
+        private System.Windows.Forms.CheckedListBox LinuxIconsCheckList;
+        private System.Windows.Forms.PictureBox linuxPreviewImage;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.CheckedListBox WindowsIconsCheckList;
+        private System.Windows.Forms.PictureBox windowsPreviewImage;
     }
 }

@@ -5,8 +5,8 @@ using System.Windows.Forms;
 
 namespace ScreenSaver
 {
-	public class ScreenSaverForm : Form
-	{
+    public class ScreenSaverForm : Form
+    {
         [DllImport("user32.dll")]
         static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
 
@@ -20,18 +20,10 @@ namespace ScreenSaver
         static extern bool GetClientRect(IntPtr hWnd, out Rectangle lpRect);
 
         private System.ComponentModel.IContainer components;
-		private Point MouseXY;
-        private Image[] images = new Image[] {
-            Properties.Resources.linux,
-            Properties.Resources.mint,
-            Properties.Resources.ubuntu,
-            Properties.Resources.windows_11,
-            Properties.Resources.windows_2003_xp,
-            Properties.Resources.windows_3,
-            Properties.Resources.windows_7,
-            Properties.Resources.windows_8_10
-        };
+        private Point MouseXY;
+        private Image[] images = IconImages.AllImages;
         private Timer timer;
+        private int numberOfImages = 0;
         private readonly int screenNumber;
         private readonly bool previewMode;
 
@@ -65,29 +57,44 @@ namespace ScreenSaver
             // room for further behavior changes to allow useful preview
         }
 
-        protected override void Dispose( bool disposing )
-		{
-			if( disposing )
-			{
-				if (components != null) 
-				{
-					components.Dispose();
-				}
-			}
-			base.Dispose( disposing );
-		}
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (components != null)
+                {
+                    components.Dispose();
+                }
+            }
+            base.Dispose(disposing);
+        }
 
-		private void ScreenSaverForm_Load(object sender, System.EventArgs e)
-		{
+        private void ScreenSaverForm_Load(object sender, EventArgs e)
+        {
+            for (int i = 0; i < Strings.AllIconNames.Length; i++)
+            {
+                string iconName = Strings.AllIconNames[i];
+                if (settings.IsIconEnabled(iconName))
+                {
+                    numberOfImages++;
+                    imageIndex = i;
+                }
+            }
+            if (numberOfImages == 0)
+            {
+                MessageBox.Show("All icons were deselected - nothing to see here!");
+                Close();
+            }
+
             if (previewMode)
             {
                 /// bounds configured in the constructor
             }
             else
             {
-			    this.Bounds = Screen.AllScreens[screenNumber].Bounds;
-			    Cursor.Hide();
-			    TopMost = true;
+                this.Bounds = Screen.AllScreens[screenNumber].Bounds;
+                Cursor.Hide();
+                TopMost = true;
             }
 
             timer.Tick += Timer1_Tick;
@@ -96,33 +103,34 @@ namespace ScreenSaver
             delayTicks = 0;
         }
 
-        private void OnMouseEvent(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void OnMouseEvent(object sender, MouseEventArgs e)
         {
-			if (!previewMode && !MouseXY.IsEmpty)
-			{
-				if (MouseXY != new Point(e.X, e.Y))
-					Close();
-				if (e.Clicks > 0)
-					Close();
-			}
-			MouseXY = new Point(e.X, e.Y);
-		}
-		
-		private void ScreenSaverForm_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
-		{
+            if (!previewMode && !MouseXY.IsEmpty)
+            {
+                // TODO allow some minimal movement
+                if (MouseXY != new Point(e.X, e.Y))
+                    Close();
+                if (e.Clicks > 0)
+                    Close();
+            }
+            MouseXY = new Point(e.X, e.Y);
+        }
+
+        private void ScreenSaverForm_KeyDown(object sender, KeyEventArgs e)
+        {
             if (!previewMode)
             {
                 Close();
             }
-		}
+        }
 
-		#region Windows Form Designer generated code
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent()
-		{
+        #region Windows Form Designer generated code
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
             this.components = new System.ComponentModel.Container();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
@@ -147,7 +155,7 @@ namespace ScreenSaver
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.OnMouseEvent);
             this.ResumeLayout(false);
 
-		}
+        }
         #endregion
 
         private Settings settings = Settings.Load();
@@ -179,7 +187,6 @@ namespace ScreenSaver
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            base.OnPaint(e);
             e.Graphics.Clear(Color.Black);
             e.Graphics.TranslateTransform(xPos, yPos);
             if (settings.rotationEffect)
@@ -214,10 +221,13 @@ namespace ScreenSaver
             {
                 speed.Y = 0;
             }
-            // different random image
-            int imageI = imageIndex;
-            while (imageIndex == imageI)
-                imageIndex = random.Next(images.Length);
+            if (numberOfImages > 1)
+            {
+                // pick a different random image
+                int imageI = imageIndex;
+                while (imageIndex == imageI || !settings.IsIconEnabled(Strings.AllIconNames[imageIndex]))
+                    imageIndex = random.Next(images.Length);
+            }
             // Random delay
             if (previewMode)
                 DelaySeconds = random.Next(2); // less delay in Preview mode

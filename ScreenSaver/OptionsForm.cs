@@ -7,35 +7,6 @@ namespace ScreenSaver
 {
     public partial class OptionsForm : Form
     {
-        private readonly string[] windowsIconNames = new string[]
-        {
-            "Windows 3.0",
-            "Windows 3.1 etc.",
-            "Windows 95-98",
-            "Windows 2000",
-            "Windows ME",
-            "Windows XP",
-            "Windows Vista",
-            "Windows 7",
-            "Windows 8 / 8.1",
-            "Windows 10",
-            "Windows 11"
-        };
-
-        private Image[] windowsImages = new Image[] {
-            Properties.WindowsIcons._3_0,
-            Properties.WindowsIcons._3_1_etc,
-            Properties.WindowsIcons._95_98,
-            Properties.WindowsIcons._2000,
-            Properties.WindowsIcons.ME,
-            Properties.WindowsIcons.XP,
-            Properties.WindowsIcons.Vista,
-            Properties.WindowsIcons._7,
-            Properties.WindowsIcons._8,
-            Properties.WindowsIcons._10,
-            Properties.WindowsIcons._11
-        };
-
         private Settings settings;
 
         public OptionsForm()
@@ -49,8 +20,19 @@ namespace ScreenSaver
             rotationEffectCheckBox.Checked = settings.rotationEffect;
             verticalMovementCheckBox.Checked = settings.moveY;
             animationSpeedSlider.Value = settings.moveSpeedX;
-            iconsCheckedListBox.Items.AddRange(windowsIconNames);
-            iconsCheckedListBox.ItemCheck += iconsCheckedListBox_ItemCheck;
+            LinuxIconsCheckList.Items.AddRange(Strings.LinuxIconNames);
+            WindowsIconsCheckList.Items.AddRange(Strings.WindowsIconNames);
+            for (int i = 0; i < Strings.LinuxIconNames.Length; i++)
+            {
+                LinuxIconsCheckList.SetItemChecked(i, settings.IsIconEnabled(Strings.LinuxIconNames[i]));
+            }
+            for (int i = 0; i < Strings.WindowsIconNames.Length; i++)
+            {
+                WindowsIconsCheckList.SetItemChecked(i,
+                    settings.IsIconEnabled(Strings.WindowsIconNames[i]));
+            }
+            LinuxIconsCheckList.ItemCheck += LinuxIconsCheckedListBox_ItemCheck;
+            WindowsIconsCheckList.ItemCheck += WindowsIconsCheckedListBox_ItemCheck;
         }
         
         private void VisitLink()
@@ -118,26 +100,39 @@ namespace ScreenSaver
         {
             settings.moveY = verticalMovementCheckBox.Checked;
         }
-        
+
+        /// <summary>
+        /// Invoked when an icon row is highlighted (selected)
+        /// </summary>
+        private void LinuxIconsCheckedListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            linuxPreviewImage.Image = IconImages.LinuxImages[LinuxIconsCheckList.SelectedIndex];
+        }
+
         /// <summary>
         /// Invoked when an icon is checked or unchecked.
         /// </summary>
-        private void iconsCheckedListBox_ItemCheck(object sender, ItemCheckEventArgs e)
+        private void LinuxIconsCheckedListBox_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             int index = e.Index;
-            CheckState newCheckValue = e.NewValue;
-            CheckState currentValue = e.CurrentValue;
-            Console.WriteLine($"Index {index}, newValue {(newCheckValue == CheckState.Checked ? "true" : "false")}");
+            settings.SetIconEnabled(Strings.LinuxIconNames[index], e.NewValue == CheckState.Checked);
         }
 
         /// <summary>
         /// Invoked when an icon row is highlighted (selected)
         /// </summary>
-        private void iconsCheckedListBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void WindowsIconsCheckedListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // show icon on right side?
-            Console.WriteLine($"Index {iconsCheckedListBox.SelectedIndex}");
-            logoPreviewImage.Image = windowsImages[iconsCheckedListBox.SelectedIndex];
+            windowsPreviewImage.Image = IconImages.WindowsImages[WindowsIconsCheckList.SelectedIndex];
+        }
+
+        /// <summary>
+        /// Invoked when an icon is checked or unchecked.
+        /// </summary>
+        private void WindowsIconsCheckedListBox_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            int index = e.Index;
+            settings.SetIconEnabled(Strings.WindowsIconNames[index], e.NewValue == CheckState.Checked);
         }
     }
 }
