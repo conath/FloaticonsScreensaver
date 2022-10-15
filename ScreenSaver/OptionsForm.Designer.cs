@@ -128,7 +128,7 @@
             this.generalFlowPanel.Location = new System.Drawing.Point(0, 0);
             this.generalFlowPanel.Margin = new System.Windows.Forms.Padding(0);
             this.generalFlowPanel.Name = "generalFlowPanel";
-            this.generalFlowPanel.Padding = new System.Windows.Forms.Padding(6);
+            this.generalFlowPanel.Padding = new System.Windows.Forms.Padding(8, 6, 6, 6);
             this.generalFlowPanel.Size = new System.Drawing.Size(348, 410);
             this.generalFlowPanel.TabIndex = 3;
             // 
@@ -138,7 +138,7 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox1.Location = new System.Drawing.Point(9, 9);
+            this.groupBox1.Location = new System.Drawing.Point(11, 9);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(6);
             this.groupBox1.Size = new System.Drawing.Size(322, 58);
@@ -153,9 +153,9 @@
             this.label3.Location = new System.Drawing.Point(6, 32);
             this.label3.Name = "label3";
             this.label3.Padding = new System.Windows.Forms.Padding(0, 2, 0, 5);
-            this.label3.Size = new System.Drawing.Size(271, 20);
+            this.label3.Size = new System.Drawing.Size(270, 20);
             this.label3.TabIndex = 1;
-            this.label3.Text = "Go to the Icons tab to change the icons that are shown.";
+            this.label3.Text = "Go to the Icons tab to choose the icons that are shown.";
             // 
             // label2
             // 
@@ -173,7 +173,7 @@
             this.groupBox2.Controls.Add(this.animationSpeedSlider);
             this.groupBox2.Controls.Add(this.verticalMovementCheckBox);
             this.groupBox2.Controls.Add(this.rotationEffectCheckBox);
-            this.groupBox2.Location = new System.Drawing.Point(9, 73);
+            this.groupBox2.Location = new System.Drawing.Point(11, 73);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(322, 119);
             this.groupBox2.TabIndex = 1;

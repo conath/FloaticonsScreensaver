@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ScreenSaver
+﻿namespace ScreenSaver
 {
     static class Strings
     {
