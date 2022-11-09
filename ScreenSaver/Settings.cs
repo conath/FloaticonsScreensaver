@@ -75,7 +75,7 @@ namespace ScreenSaver
                 LoadMainSettings();
                 LoadIconSettings();
             }
-            catch (InvalidCastException e)
+            catch (InvalidCastException)
             {
                 MessageBox.Show("Can't load registry keys.");
                 // default settings

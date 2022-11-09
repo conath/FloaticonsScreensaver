@@ -108,6 +108,21 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="IconImages.cs" />
+    <Compile Include="Properties\MjdResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MjdResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\MjdSoftwareServicesIcons.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MjdSoftwareServicesIcons.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\MjdTechBrandsIcons.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MjdTechBrandsIcons.resx</DependentUpon>
+    </Compile>
     <Compile Include="Strings.cs" />
     <Compile Include="Properties\WindowsIcons.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -134,6 +149,37 @@
       <SubType>Form</SubType>
     </Compile>
     <Content Include="App.ico" />
+    <Content Include="Resources\MJD\Dell_Monitor_Frame.png" />
+    <Content Include="Resources\MJD\MJD.png" />
+    <Content Include="Resources\MJD\Software_Services_Icons\Cydia.png" />
+    <Content Include="Resources\MJD\Software_Services_Icons\eBay.png" />
+    <Content Include="Resources\MJD\Software_Services_Icons\FaceTime.png" />
+    <Content Include="Resources\MJD\Software_Services_Icons\Firefox.png" />
+    <Content Include="Resources\MJD\Software_Services_Icons\Google_Chrome.png" />
+    <Content Include="Resources\MJD\Software_Services_Icons\Hulu.png" />
+    <Content Include="Resources\MJD\Software_Services_Icons\iTunes.png" />
+    <Content Include="Resources\MJD\Software_Services_Icons\Mac_OS.png" />
+    <Content Include="Resources\MJD\Software_Services_Icons\Microsoft_Edge.png" />
+    <Content Include="Resources\MJD\Software_Services_Icons\MS_Office_97.png" />
+    <Content Include="Resources\MJD\Software_Services_Icons\MS_DOS.png" />
+    <Content Include="Resources\MJD\Software_Services_Icons\MSN_Messenger.png" />
+    <Content Include="Resources\MJD\Software_Services_Icons\Netscape.png" />
+    <Content Include="Resources\MJD\Software_Services_Icons\Twitter.png" />
+    <Content Include="Resources\MJD\Software_Services_Icons\Windows_Longhorn.png" />
+    <Content Include="Resources\MJD\Software_Services_Icons\Windows_Whistler.png" />
+    <Content Include="Resources\MJD\Tech_Brands_Icons\Alienware.png" />
+    <Content Include="Resources\MJD\Tech_Brands_Icons\Amazon.png" />
+    <Content Include="Resources\MJD\Tech_Brands_Icons\Apple_Aqua.png" />
+    <Content Include="Resources\MJD\Tech_Brands_Icons\Apple_Grey.png" />
+    <Content Include="Resources\MJD\Tech_Brands_Icons\Apple_Rainbow.png" />
+    <Content Include="Resources\MJD\Tech_Brands_Icons\Dell.png" />
+    <Content Include="Resources\MJD\Tech_Brands_Icons\Google.png" />
+    <Content Include="Resources\MJD\Tech_Brands_Icons\HP_white.png" />
+    <Content Include="Resources\MJD\Tech_Brands_Icons\IBM.png" />
+    <Content Include="Resources\MJD\Tech_Brands_Icons\Microsoft_old.png" />
+    <Content Include="Resources\MJD\Tech_Brands_Icons\Microsoft.png" />
+    <Content Include="Resources\MJD\Tech_Brands_Icons\Nintendo.png" />
+    <Content Include="Resources\MJD\Tech_Brands_Icons\Packard_Bell.png" />
     <Content Include="Resources\Windows\10.png" />
     <Content Include="Resources\Windows\2000.png" />
     <Content Include="Resources\Windows\3_0.png" />
@@ -145,16 +191,23 @@
     <None Include="Resources\Windows\xp.png" />
     <None Include="Resources\Windows\3_1_etc.png" />
     <None Include="Resources\Windows\7.png" />
-    <None Include="Resources\windows_2003_xp.png" />
-    <None Include="Resources\windows_11.png" />
-    <None Include="Resources\windows_8_10.png" />
-    <None Include="Resources\windows_7.png" />
     <None Include="Resources\ubuntu.png" />
     <None Include="Resources\mint.png" />
     <None Include="Resources\linux.png" />
-    <None Include="Resources\windows_3.png" />
     <EmbeddedResource Include="OptionsForm.resx">
       <DependentUpon>OptionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\MjdResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MjdResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\MjdSoftwareServicesIcons.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MjdSoftwareServicesIcons.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\MjdTechBrandsIcons.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MjdTechBrandsIcons.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
