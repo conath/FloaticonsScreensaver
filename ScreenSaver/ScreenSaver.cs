@@ -25,7 +25,7 @@ namespace ScreenSaver
 
                 //MessageBox.Show("firstFlag " + firstFlag + " secondFlag " + secondFlag, "Floaticons Screensaver", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
-                // configure
+                // determine which mode to run in
                 switch (firstFlag)
                 {
                     case "/c": // configure
@@ -53,7 +53,6 @@ namespace ScreenSaver
 
         private static void RunOptions(string firstArgument, string secondArgument)
         {
-            // TODO: Allow choosing which icons should appear. Maybe even load custom icons
             Application.Run(new OptionsForm());
         }
 
