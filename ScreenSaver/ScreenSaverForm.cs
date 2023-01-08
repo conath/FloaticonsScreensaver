@@ -21,7 +21,7 @@ namespace ScreenSaver
 
         private System.ComponentModel.IContainer components;
         private Point MouseXY;
-        private Image[] images = IconImages.AllImages;
+        private Image[] images;
         private Timer timer;
         private int numberOfImages = 0;
         private readonly int screenNumber;
@@ -71,9 +71,11 @@ namespace ScreenSaver
 
         private void ScreenSaverForm_Load(object sender, EventArgs e)
         {
-            for (int i = 0; i < Strings.AllIconNames.Length; i++)
+            images = IconImages.GetAllImages(includeMjd: settings.mjdMode);
+            string[] allIconNames = Strings.GetAllIconNames(includeMjd: settings.mjdMode);
+            for (int i = 0; i < allIconNames.Length; i++)
             {
-                string iconName = Strings.AllIconNames[i];
+                string iconName = allIconNames[i];
                 if (settings.IsIconEnabled(iconName))
                 {
                     numberOfImages++;
@@ -224,9 +226,10 @@ namespace ScreenSaver
             if (numberOfImages > 1)
             {
                 // pick a different random image
+                string[] allIconNames = Strings.GetAllIconNames(includeMjd: settings.mjdMode);
                 int imageI = imageIndex;
-                while (imageIndex == imageI || !settings.IsIconEnabled(Strings.AllIconNames[imageIndex]))
-                    imageIndex = random.Next(images.Length);
+                while (imageIndex == imageI || !settings.IsIconEnabled(allIconNames[imageIndex]))
+                    imageIndex = random.Next(allIconNames.Length);
             }
             // Random delay
             if (previewMode)

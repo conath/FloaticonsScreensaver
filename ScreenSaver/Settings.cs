@@ -11,6 +11,7 @@ namespace ScreenSaver
         public bool rotationEffect = true;
         public int moveSpeedX = 9; // range 0-10
         public bool moveY = true;
+        public bool mjdMode = false;
 
         private Dictionary<string, bool> iconEnableState = new Dictionary<string, bool>();
 
@@ -20,9 +21,11 @@ namespace ScreenSaver
         #region Loading and storing data
         private const string REGISTRY_SUBKEY = "Software\\Floaticons Screensaver";
         private const string ICONS_SUBKEY = "\\Icon State";
+        private const string MJD_SUBKEY = "\\MJD";
         private const string NAME_ROTATION = "RotationEffect";
         private const string NAME_XSPEED = "XMovementSpeed";
         private const string NAME_YMOVE = "YMovement";
+        private const string NAME_MJD_MODE = "EnableMjdMode";
 
         private Settings()
         { }
@@ -51,10 +54,11 @@ namespace ScreenSaver
                 if (key != null)
                     key.Close();
                 key = Registry.CurrentUser.OpenSubKey(REGISTRY_SUBKEY + ICONS_SUBKEY);
+                string[] allIconNames = Strings.GetAllIconNames();
                 if (key == null)
                 {
                     // default settings
-                    foreach (var name in Strings.AllIconNames)
+                    foreach (var name in allIconNames)
                     {
                         instance.SetIconEnabled(name, IconDefaultState);
                     }
@@ -62,11 +66,25 @@ namespace ScreenSaver
                 else
                 {
                     // read settings
-                    foreach (var name in Strings.AllIconNames)
+                    foreach (var name in allIconNames)
                     {
                         bool state = 1 == (int)key.GetValue(name, defaultValue: IconDefaultState);
                         instance.SetIconEnabled(name, state);
                     }
+                }
+            }
+            void LoadMjdSettings()
+            {
+                if (key != null)
+                    key.Close();
+                key = Registry.CurrentUser.OpenSubKey(REGISTRY_SUBKEY + MJD_SUBKEY);
+                if (key == null)
+                {
+                    // default settings
+                }
+                else
+                {
+                    instance.mjdMode = (int)key.GetValue(NAME_MJD_MODE, 0) == 1;
                 }
             }
 
@@ -74,12 +92,14 @@ namespace ScreenSaver
             {
                 LoadMainSettings();
                 LoadIconSettings();
+                LoadMjdSettings();
             }
             catch (InvalidCastException)
             {
                 MessageBox.Show("Can't load registry keys.");
                 // default settings
-                foreach (var name in Strings.AllIconNames)
+                string[] allIconNames = Strings.GetAllIconNames();
+                foreach (var name in allIconNames)
                 {
                     instance.SetIconEnabled(name, IconDefaultState);
                 }
@@ -107,17 +127,32 @@ namespace ScreenSaver
 
         public void Save()
         {
-            RegistryKey mainKey = Registry.CurrentUser.CreateSubKey(REGISTRY_SUBKEY);
-            mainKey.SetValue(NAME_ROTATION, rotationEffect ? 1 : 0);
-            mainKey.SetValue(NAME_XSPEED, moveSpeedX);
-            mainKey.SetValue(NAME_YMOVE, moveY ? 1 : 0);
-            mainKey.Close();
-            RegistryKey iconsKey = Registry.CurrentUser.CreateSubKey(REGISTRY_SUBKEY + ICONS_SUBKEY);
-            foreach (var name in iconEnableState.Keys)
+            void SaveMainSettings()
             {
-                iconsKey.SetValue(name, iconEnableState[name] ? 1 : 0);
+                RegistryKey mainKey = Registry.CurrentUser.CreateSubKey(REGISTRY_SUBKEY);
+                mainKey.SetValue(NAME_ROTATION, rotationEffect ? 1 : 0);
+                mainKey.SetValue(NAME_XSPEED, moveSpeedX);
+                mainKey.SetValue(NAME_YMOVE, moveY ? 1 : 0);
+                mainKey.Close();
             }
-            iconsKey.Close();
+            void SaveIconSettings()
+            {
+                RegistryKey iconsKey = Registry.CurrentUser.CreateSubKey(REGISTRY_SUBKEY + ICONS_SUBKEY);
+                foreach (var name in iconEnableState.Keys)
+                {
+                    iconsKey.SetValue(name, iconEnableState[name] ? 1 : 0);
+                }
+                iconsKey.Close();
+            }
+            void SaveMjdSettings()
+            {
+                RegistryKey mjdKey = Registry.CurrentUser.CreateSubKey(REGISTRY_SUBKEY + MJD_SUBKEY);
+                mjdKey.SetValue(NAME_MJD_MODE, mjdMode ? 1 : 0);
+                mjdKey.Close();
+            }
+            SaveMainSettings();
+            SaveIconSettings();
+            SaveMjdSettings();
         }
         #endregion
     }

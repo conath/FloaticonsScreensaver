@@ -5,43 +5,55 @@ namespace ScreenSaver
     static class IconImages
     {
         private static Image[] _allImages;
+        private static Image[] _allImagesMjd;
 
-        public static Image[] AllImages {
-            get {
-                if (_allImages == null)
-                {
-                    int offset = 0;
-                    int length = LinuxImages.Length + WindowsImages.Length
-                        + MjdImages.Length + MjdSoftwareServicesImages.Length + MjdTechBrandsImages.Length;
-                    _allImages = new Image[length];
-                    for (int i = 0; i < LinuxImages.Length; i++)
-                    {
-                        _allImages[offset] = LinuxImages[i];
-                        offset++;
-                    }
-                    for (int i = 0; i < WindowsImages.Length; i++)
-                    {
-                        _allImages[offset] = WindowsImages[i];
-                        offset++;
-                    }
-                    for (int i = 0; i < MjdImages.Length; i++)
-                    {
-                        _allImages[offset] = MjdImages[i];
-                        offset++;
-                    }
-                    for (int i = 0; i < MjdSoftwareServicesImages.Length; i++)
-                    {
-                        _allImages[offset] = MjdSoftwareServicesImages[i];
-                        offset++;
-                    }
-                    for (int i = 0; i < MjdTechBrandsImages.Length; i++)
-                    {
-                        _allImages[offset] = MjdTechBrandsImages[i];
-                        offset++;
-                    }
-                }
+        public static Image[] GetAllImages(bool includeMjd = true)
+        {
+            if (includeMjd && _allImagesMjd != null)
+                return _allImagesMjd;
+            if (!includeMjd && _allImages != null)
                 return _allImages;
+            // images not yet cached
+            int offset = 0;
+            int length = LinuxImages.Length + WindowsImages.Length;
+            if (includeMjd)
+                length += MjdImages.Length + MjdSoftwareServicesImages.Length + MjdTechBrandsImages.Length;
+            Image[] images = new Image[length];
+            // get image references
+            for (int i = 0; i < LinuxImages.Length; i++)
+            {
+                images[offset] = LinuxImages[i];
+                offset++;
             }
+            for (int i = 0; i < WindowsImages.Length; i++)
+            {
+                images[offset] = WindowsImages[i];
+                offset++;
+            }
+            if (includeMjd)
+            {
+                for (int i = 0; i < MjdImages.Length; i++)
+                {
+                    images[offset] = MjdImages[i];
+                    offset++;
+                }
+                for (int i = 0; i < MjdSoftwareServicesImages.Length; i++)
+                {
+                    images[offset] = MjdSoftwareServicesImages[i];
+                    offset++;
+                }
+                for (int i = 0; i < MjdTechBrandsImages.Length; i++)
+                {
+                    images[offset] = MjdTechBrandsImages[i];
+                    offset++;
+                }
+                _allImagesMjd = images;
+            }
+            else
+            {
+                _allImages = images;
+            }
+            return images;
         }
 
         public static Image[] LinuxImages = new Image[] {

@@ -3,45 +3,54 @@
     static class Strings
     {
         private static string[] _allStrings;
+        private static string[] _allStringsMjd;
 
-        public static string[] AllIconNames
+        public static string[] GetAllIconNames(bool includeMjd = true)
         {
-            get
-            {
-                if (_allStrings == null)
-                {
-                    int offset = 0;
-                    int length = LinuxIconNames.Length + WindowsIconNames.Length 
-                        + MjdIconNames.Length + MjdSoftwareServicesIconNames.Length + MjdTechBrandsIconNames.Length;
-                    _allStrings = new string[length];
-                    for (int i = 0; i < LinuxIconNames.Length; i++)
-                    {
-                        _allStrings[offset] = LinuxIconNames[i];
-                        offset++;
-                    }
-                    for (int i = 0; i < WindowsIconNames.Length; i++)
-                    {
-                        _allStrings[offset] = WindowsIconNames[i];
-                        offset++;
-                    }
-                    for (int i = 0; i < MjdIconNames.Length; i++)
-                    {
-                        _allStrings[offset] = MjdIconNames[i];
-                        offset++;
-                    }
-                    for (int i = 0; i < MjdSoftwareServicesIconNames.Length; i++)
-                    {
-                        _allStrings[offset] = MjdSoftwareServicesIconNames[i];
-                        offset++;
-                    }
-                    for (int i = 0; i < MjdTechBrandsIconNames.Length; i++)
-                    {
-                        _allStrings[offset] = MjdTechBrandsIconNames[i];
-                        offset++;
-                    }
-                }
+            if (includeMjd && _allStringsMjd != null)
+                return _allStringsMjd;
+            if (!includeMjd && _allStrings != null)
                 return _allStrings;
+            // strings not yet cached
+            int offset = 0;
+            int length = LinuxIconNames.Length + WindowsIconNames.Length;
+            if (includeMjd)
+                length += MjdIconNames.Length + MjdSoftwareServicesIconNames.Length + MjdTechBrandsIconNames.Length;
+            string[] strings = new string[length];
+            for (int i = 0; i < LinuxIconNames.Length; i++)
+            {
+                strings[offset] = LinuxIconNames[i];
+                offset++;
             }
+            for (int i = 0; i < WindowsIconNames.Length; i++)
+            {
+                strings[offset] = WindowsIconNames[i];
+                offset++;
+            }
+            if (includeMjd)
+            {
+                for (int i = 0; i < MjdIconNames.Length; i++)
+                {
+                    strings[offset] = MjdIconNames[i];
+                    offset++;
+                }
+                for (int i = 0; i < MjdSoftwareServicesIconNames.Length; i++)
+                {
+                    strings[offset] = MjdSoftwareServicesIconNames[i];
+                    offset++;
+                }
+                for (int i = 0; i < MjdTechBrandsIconNames.Length; i++)
+                {
+                    strings[offset] = MjdTechBrandsIconNames[i];
+                    offset++;
+                }
+                _allStringsMjd = strings;
+            }
+            else
+            {
+                _allStrings = strings;
+            }
+            return strings;
         }
 
         public static string[] LinuxIconNames = new string[] {
