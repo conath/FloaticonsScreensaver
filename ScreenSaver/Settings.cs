@@ -11,7 +11,9 @@ namespace ScreenSaver
         public bool rotationEffect = true;
         public int moveSpeedX = 9; // range 0-10
         public bool moveY = true;
+
         public bool mjdMode = false;
+        public bool showMjdIconFirst = true;
 
         private Dictionary<string, bool> iconEnableState = new Dictionary<string, bool>();
 
@@ -26,6 +28,7 @@ namespace ScreenSaver
         private const string NAME_XSPEED = "XMovementSpeed";
         private const string NAME_YMOVE = "YMovement";
         private const string NAME_MJD_MODE = "EnableMjdMode";
+        private const string NAME_MJD_FIRST = "ShowMjdFirst";
 
         private Settings()
         { }
@@ -85,6 +88,7 @@ namespace ScreenSaver
                 else
                 {
                     instance.mjdMode = (int)key.GetValue(NAME_MJD_MODE, 0) == 1;
+                    instance.showMjdIconFirst = (int)key.GetValue(NAME_MJD_FIRST, 1) == 1;
                 }
             }
 
@@ -148,6 +152,7 @@ namespace ScreenSaver
             {
                 RegistryKey mjdKey = Registry.CurrentUser.CreateSubKey(REGISTRY_SUBKEY + MJD_SUBKEY);
                 mjdKey.SetValue(NAME_MJD_MODE, mjdMode ? 1 : 0);
+                mjdKey.SetValue(NAME_MJD_FIRST, showMjdIconFirst ? 1 : 0);
                 mjdKey.Close();
             }
             SaveMainSettings();

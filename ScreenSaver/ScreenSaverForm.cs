@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
@@ -103,6 +104,16 @@ namespace ScreenSaver
             timer.Start();
             Randomize();
             delayTicks = 0;
+            // MJD feature: show MJD icon first
+            if (settings.mjdMode && settings.showMjdIconFirst)
+            {
+                // this is a bit of a hacky feature, so let's verify the index
+                int index = IconImages.MjdIconIndex;
+                if (index > -1 && index < images.Length)
+                    imageIndex = IconImages.MjdIconIndex;
+                else
+                    Console.Error.WriteLine("MJD Mode ShowMjdFirst is broken");
+            }
         }
 
         private void OnMouseEvent(object sender, MouseEventArgs e)

@@ -35,6 +35,11 @@ namespace ScreenSaver
                 for (int i = 0; i < MjdImages.Length; i++)
                 {
                     images[offset] = MjdImages[i];
+                    // HACK: assume first image in MjdImages is MJD icon
+                    if (i == 0)
+                    {
+                        MjdIconIndex = offset;
+                    }
                     offset++;
                 }
                 for (int i = 0; i < MjdSoftwareServicesImages.Length; i++)
@@ -74,6 +79,8 @@ namespace ScreenSaver
             Properties.WindowsIcons._10,
             Properties.WindowsIcons._11
         };
+
+        public static int MjdIconIndex;
 
         public static Image[] MjdImages = new Image[]
         {
