@@ -101,7 +101,7 @@
 
         public static string[] MjdTechBrandsIconNames = new string[]
         {
-           "Alienware",
+            "Alienware",
             "Amazon",
             "Apple Aqua",
             "Apple Grey",

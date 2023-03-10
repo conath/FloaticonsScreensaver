@@ -29,7 +29,13 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.Label speedSliderLabel;
+            System.Windows.Forms.FlowLayoutPanel mjdFlowPanel;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OptionsForm));
+            System.Windows.Forms.Label label6;
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.mjdModeCheckBox = new System.Windows.Forms.CheckBox();
+            this.showMjdIconFirstCheckbox = new System.Windows.Forms.CheckBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.generalTabPage = new System.Windows.Forms.TabPage();
             this.generalFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
@@ -55,12 +61,22 @@
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.mjdLabel = new System.Windows.Forms.LinkLabel();
+            this.mjdTabPage = new System.Windows.Forms.TabPage();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.previewButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.okButton = new System.Windows.Forms.Button();
             this.previewProcess = new System.Diagnostics.Process();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
             speedSliderLabel = new System.Windows.Forms.Label();
+            mjdFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
+            label6 = new System.Windows.Forms.Label();
+            mjdFlowPanel.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.generalTabPage.SuspendLayout();
             this.generalFlowPanel.SuspendLayout();
@@ -77,7 +93,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.linuxPreviewImage)).BeginInit();
             this.aboutTabPage.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
+            this.mjdTabPage.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // speedSliderLabel
@@ -91,11 +110,84 @@
             speedSliderLabel.TabIndex = 3;
             speedSliderLabel.Text = "Movement Speed";
             // 
+            // mjdFlowPanel
+            // 
+            mjdFlowPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            mjdFlowPanel.AutoSize = true;
+            mjdFlowPanel.Controls.Add(this.groupBox4);
+            mjdFlowPanel.Controls.Add(this.groupBox5);
+            mjdFlowPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            mjdFlowPanel.Location = new System.Drawing.Point(0, 0);
+            mjdFlowPanel.Margin = new System.Windows.Forms.Padding(0);
+            mjdFlowPanel.Name = "mjdFlowPanel";
+            mjdFlowPanel.Padding = new System.Windows.Forms.Padding(8, 6, 6, 6);
+            mjdFlowPanel.Size = new System.Drawing.Size(348, 410);
+            mjdFlowPanel.TabIndex = 4;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.AutoSize = true;
+            this.groupBox4.Controls.Add(this.mjdModeCheckBox);
+            this.groupBox4.Controls.Add(this.showMjdIconFirstCheckbox);
+            this.groupBox4.Controls.Add(this.label5);
+            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox4.Location = new System.Drawing.Point(11, 9);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(6);
+            this.groupBox4.Size = new System.Drawing.Size(322, 84);
+            this.groupBox4.TabIndex = 0;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Michael MJD Mode";
+            // 
+            // mjdModeCheckBox
+            // 
+            this.mjdModeCheckBox.AutoSize = true;
+            this.mjdModeCheckBox.Checked = true;
+            this.mjdModeCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.mjdModeCheckBox.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.mjdModeCheckBox.Location = new System.Drawing.Point(6, 36);
+            this.mjdModeCheckBox.Name = "mjdModeCheckBox";
+            this.mjdModeCheckBox.Padding = new System.Windows.Forms.Padding(4, 0, 4, 4);
+            this.mjdModeCheckBox.Size = new System.Drawing.Size(310, 21);
+            this.mjdModeCheckBox.TabIndex = 3;
+            this.mjdModeCheckBox.Text = "MJD Mode enabled";
+            this.mjdModeCheckBox.UseVisualStyleBackColor = true;
+            this.mjdModeCheckBox.CheckedChanged += new System.EventHandler(this.mjdModeCheckBox_CheckedChanged);
+            // 
+            // showMjdIconFirstCheckbox
+            // 
+            this.showMjdIconFirstCheckbox.AutoSize = true;
+            this.showMjdIconFirstCheckbox.Checked = true;
+            this.showMjdIconFirstCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.showMjdIconFirstCheckbox.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.showMjdIconFirstCheckbox.Location = new System.Drawing.Point(6, 57);
+            this.showMjdIconFirstCheckbox.Name = "showMjdIconFirstCheckbox";
+            this.showMjdIconFirstCheckbox.Padding = new System.Windows.Forms.Padding(4, 0, 4, 4);
+            this.showMjdIconFirstCheckbox.Size = new System.Drawing.Size(310, 21);
+            this.showMjdIconFirstCheckbox.TabIndex = 2;
+            this.showMjdIconFirstCheckbox.Text = "Show MJD icon first";
+            this.showMjdIconFirstCheckbox.UseVisualStyleBackColor = true;
+            this.showMjdIconFirstCheckbox.CheckedChanged += new System.EventHandler(this.showMjdIconsFirstCheckbox_CheckedChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label5.Location = new System.Drawing.Point(6, 19);
+            this.label5.Name = "label5";
+            this.label5.Padding = new System.Windows.Forms.Padding(0, 0, 0, 4);
+            this.label5.Size = new System.Drawing.Size(308, 17);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Additional icons have been unlocked, as seen on Michael MJD!";
+            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.generalTabPage);
             this.tabControl1.Controls.Add(this.iconsTabPage);
             this.tabControl1.Controls.Add(this.aboutTabPage);
+            this.tabControl1.Controls.Add(this.mjdTabPage);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tabControl1.Location = new System.Drawing.Point(6, 6);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(8);
@@ -372,6 +464,7 @@
             // 
             this.flowLayoutPanel2.Controls.Add(this.label1);
             this.flowLayoutPanel2.Controls.Add(this.linkLabel1);
+            this.flowLayoutPanel2.Controls.Add(this.mjdLabel);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 3);
@@ -387,9 +480,9 @@
             this.label1.Location = new System.Drawing.Point(9, 6);
             this.label1.Name = "label1";
             this.label1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 4);
-            this.label1.Size = new System.Drawing.Size(192, 17);
+            this.label1.Size = new System.Drawing.Size(219, 17);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Floaticons © 2022 Christoph Parstorfer.";
+            this.label1.Text = "Floaticons © 2022-2023 Christoph Parstorfer.";
             // 
             // linkLabel1
             // 
@@ -404,6 +497,31 @@
             this.linkLabel1.Text = "View the source code on GitHub.";
             this.linkLabel1.UseCompatibleTextRendering = true;
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
+            // mjdLabel
+            // 
+            this.mjdLabel.AutoSize = true;
+            this.mjdLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.mjdLabel.LinkArea = new System.Windows.Forms.LinkArea(12, 11);
+            this.mjdLabel.Location = new System.Drawing.Point(9, 40);
+            this.mjdLabel.Name = "mjdLabel";
+            this.mjdLabel.Size = new System.Drawing.Size(131, 17);
+            this.mjdLabel.TabIndex = 2;
+            this.mjdLabel.TabStop = true;
+            this.mjdLabel.Text = "Inspired by Michael MJD.";
+            this.mjdLabel.UseCompatibleTextRendering = true;
+            this.mjdLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.mjdLabel_LinkClicked);
+            // 
+            // mjdTabPage
+            // 
+            this.mjdTabPage.Controls.Add(mjdFlowPanel);
+            this.mjdTabPage.Location = new System.Drawing.Point(4, 22);
+            this.mjdTabPage.Name = "mjdTabPage";
+            this.mjdTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.mjdTabPage.Size = new System.Drawing.Size(348, 410);
+            this.mjdTabPage.TabIndex = 3;
+            this.mjdTabPage.Text = "MJD Mode";
+            this.mjdTabPage.UseVisualStyleBackColor = true;
             // 
             // flowLayoutPanel1
             // 
@@ -433,6 +551,7 @@
             // 
             // cancelButton
             // 
+            this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cancelButton.Location = new System.Drawing.Point(169, 4);
             this.cancelButton.Margin = new System.Windows.Forms.Padding(0, 0, 8, 0);
             this.cancelButton.Name = "cancelButton";
@@ -466,14 +585,82 @@
             this.previewProcess.StartInfo.WorkingDirectory = ".\\";
             this.previewProcess.SynchronizingObject = this;
             // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Checked = true;
+            this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.checkBox2.Location = new System.Drawing.Point(3, 91);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Padding = new System.Windows.Forms.Padding(4);
+            this.checkBox2.Size = new System.Drawing.Size(316, 25);
+            this.checkBox2.TabIndex = 0;
+            this.checkBox2.Text = "Rotation (icons will rotate slightly as they fly across)";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Checked = true;
+            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.checkBox1.Location = new System.Drawing.Point(3, 70);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Padding = new System.Windows.Forms.Padding(4, 0, 4, 4);
+            this.checkBox1.Size = new System.Drawing.Size(316, 21);
+            this.checkBox1.TabIndex = 1;
+            this.checkBox1.Text = "Move diagonally (icons will move on tilted/diagonal paths)";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // trackBar1
+            // 
+            this.trackBar1.AutoSize = false;
+            this.trackBar1.BackColor = System.Drawing.SystemColors.Window;
+            this.trackBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.trackBar1.LargeChange = 2;
+            this.trackBar1.Location = new System.Drawing.Point(3, 31);
+            this.trackBar1.Margin = new System.Windows.Forms.Padding(0);
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(316, 39);
+            this.trackBar1.TabIndex = 2;
+            this.trackBar1.Value = 9;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Dock = System.Windows.Forms.DockStyle.Top;
+            label6.Location = new System.Drawing.Point(3, 16);
+            label6.Name = "label6";
+            label6.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
+            label6.Size = new System.Drawing.Size(91, 15);
+            label6.TabIndex = 3;
+            label6.Text = "Movement Speed";
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(label6);
+            this.groupBox5.Controls.Add(this.trackBar1);
+            this.groupBox5.Controls.Add(this.checkBox1);
+            this.groupBox5.Controls.Add(this.checkBox2);
+            this.groupBox5.Location = new System.Drawing.Point(11, 99);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(322, 119);
+            this.groupBox5.TabIndex = 1;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Animation";
+            // 
             // OptionsForm
             // 
+            this.AcceptButton = this.okButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.cancelButton;
             this.ClientSize = new System.Drawing.Size(368, 474);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(384, 512);
             this.MinimumSize = new System.Drawing.Size(384, 512);
             this.Name = "OptionsForm";
@@ -481,6 +668,10 @@
             this.Text = "Floaticons Options";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OptionsForm_FormClosing);
             this.Load += new System.EventHandler(this.OptionsForm_Load);
+            mjdFlowPanel.ResumeLayout(false);
+            mjdFlowPanel.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.generalTabPage.ResumeLayout(false);
             this.generalTabPage.PerformLayout();
@@ -504,7 +695,12 @@
             this.aboutTabPage.ResumeLayout(false);
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel2.PerformLayout();
+            this.mjdTabPage.ResumeLayout(false);
+            this.mjdTabPage.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -541,5 +737,15 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.CheckedListBox WindowsIconsCheckList;
         private System.Windows.Forms.PictureBox windowsPreviewImage;
+        private System.Windows.Forms.TabPage mjdTabPage;
+        private System.Windows.Forms.LinkLabel mjdLabel;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.CheckBox showMjdIconFirstCheckbox;
+        private System.Windows.Forms.CheckBox mjdModeCheckBox;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBox2;
     }
 }

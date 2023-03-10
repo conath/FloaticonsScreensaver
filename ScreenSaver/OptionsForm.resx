@@ -120,6 +120,12 @@
   <metadata name="speedSliderLabel.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <metadata name="mjdFlowPanel.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <metadata name="label6.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="windowsPreviewImage.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -426,7 +432,7 @@
         VeSr4ZmNMyOvg17f/sX7F+Gsy2zPG/qbs2/13p6co81VzVPmj7yjvav6lfJr+YL8wqH3su+LP0AfBB8+
         fdz+8bffMn/78Hv6ImIx5xP4JPgEfxZ8huFsGBZ7AbEXEHsBsRcQewGxFxB7AbEXEHsBsRcQewGxFxB7
         AbEXEHuB/18v8Hd7J3/WGAlKRUM8URL/ojHyH2epM+K48dxkHi2Oz0+2pdMzMjJM/yWZMpMS/vbRY6LE
-        i45W/6uezL/7I2cV8aBNNPahqTwuZ1lz8nWl/RNfAIiAaAHxBQAAAAlwSFlzAAALDwAACw8BkvkDpQAA
+        i45W/6uezL/7I2cV8aBNNPahqTwuZ1lz8nWl/RNfAIiAaAHxBQAAAAlwSFlzAAALDAAACwwBP0AiyAAA
         AOZlWElmTU0AKgAAAAgABwESAAMAAAABAAEAAAEaAAUAAAABAAAAYgEbAAUAAAABAAAAagEoAAMAAAAB
         AAIAAAExAAIAAAAiAAAAcgEyAAIAAAAUAAAAlIdpAAQAAAABAAAAqAAAAAAAAABIAAAAAQAAAEgAAAAB
         QWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKFdpbmRvd3MpADIwMTk6MDI6MDEgMTQ6NDA6MzEAAAOQBAAC
@@ -807,4 +813,7 @@
         AAChAQAAoQEAAKEBAAChAQAAoQEAALkBAAD//wAA/n8AAPw/AAD4HwAA+B8AAPw/AAD+fwAA//8AAA==
 </value>
   </data>
+  <metadata name="label6.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
 </root>

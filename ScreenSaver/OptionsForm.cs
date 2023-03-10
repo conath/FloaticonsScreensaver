@@ -32,6 +32,8 @@ namespace ScreenSaver
             }
             LinuxIconsCheckList.ItemCheck += LinuxIconsCheckedListBox_ItemCheck;
             WindowsIconsCheckList.ItemCheck += WindowsIconsCheckedListBox_ItemCheck;
+            // hide mjd button by default, unless MJD mode is enabled
+            if (!settings.mjdMode) tabControl1.TabPages.Remove(mjdTabPage);
         }
         
         private void VisitLink()
@@ -132,6 +134,32 @@ namespace ScreenSaver
         {
             int index = e.Index;
             settings.SetIconEnabled(Strings.WindowsIconNames[index], e.NewValue == CheckState.Checked);
+        }
+
+        private void mjdLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (settings.mjdMode)
+            {
+                // show YouTube channel
+                Process.Start("http://mjd.yt");
+                e.Link.Visited = true;
+            }
+            else
+            {
+                // reveal MJD tab
+                tabControl1.TabPages.Add(mjdTabPage);
+                settings.mjdMode = true;
+            }
+        }
+
+        private void mjdModeCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            settings.mjdMode = mjdModeCheckBox.Checked;
+        }
+
+        private void showMjdIconsFirstCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            settings.showMjdIconFirst = showMjdIconFirstCheckbox.Checked;
         }
     }
 }
