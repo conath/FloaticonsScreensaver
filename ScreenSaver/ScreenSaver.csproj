@@ -149,6 +149,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Content Include="App.ico" />
+    <None Include="Resources\Dell 4x3 LCD Frame.png" />
     <Content Include="Resources\MJD\Dell_Monitor_Frame.png" />
     <Content Include="Resources\MJD\MJD.png" />
     <Content Include="Resources\MJD\Software_Services_Icons\Cydia.png" />

@@ -23,7 +23,7 @@ namespace ScreenSaver
         private System.ComponentModel.IContainer components;
         private Point MouseXY;
         private Image[] images;
-        private Timer timer;
+        private Image dellMonitorFrameImage;
         private int numberOfImages = 0;
         private readonly int screenNumber;
         private readonly bool previewMode;
@@ -73,6 +73,8 @@ namespace ScreenSaver
         private void ScreenSaverForm_Load(object sender, EventArgs e)
         {
             images = IconImages.GetAllImages(includeMjd: settings.mjdMode);
+            if (settings.mjdMode)
+                dellMonitorFrameImage = Properties.MjdResources.DellMonitorFrame;
             string[] allIconNames = Strings.GetAllIconNames(includeMjd: settings.mjdMode);
             for (int i = 0; i < allIconNames.Length; i++)
             {
@@ -200,17 +202,22 @@ namespace ScreenSaver
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            e.Graphics.Clear(Color.Black);
-            e.Graphics.TranslateTransform(xPos, yPos);
+            Graphics graphics = e.Graphics;
+            graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+            graphics.TranslateTransform(xPos, yPos);
             if (settings.rotationEffect)
             {
                 float newRot = xPos / rotationDivident + angleOffset;
-                e.Graphics.RotateTransform((int)Math.Round(newRot), System.Drawing.Drawing2D.MatrixOrder.Prepend);
+                graphics.RotateTransform((int)Math.Round(newRot), System.Drawing.Drawing2D.MatrixOrder.Prepend);
             }
-            if (previewMode)
-                e.Graphics.DrawImage(images[imageIndex], 0, 0, IconWidth, IconHeight);
-            else
-                e.Graphics.DrawImage(images[imageIndex], 0, 0, IconWidth, IconHeight);
+            graphics.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceCopy;
+            graphics.DrawImage(images[imageIndex], 0, 0, IconWidth, IconHeight);
+            graphics.ResetTransform();
+            if (settings.mjdMode) // todo more checks, only show while is previewing
+            {
+                graphics.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceOver;
+                graphics.DrawImage(dellMonitorFrameImage, 0, 0, Width, Height);
+            }
         }
 
         private void Randomize()
@@ -264,12 +271,25 @@ namespace ScreenSaver
                 return;
             }
             // move
-            xPos+= speed.X;
-            yPos+= speed.Y;
+            xPos += speed.X;
+            yPos += speed.Y;
             // flew out of bounds?
             if (xPos > Width + 200 || xPos < XStartLeft)
             {
                 Randomize();
+                Invalidate();
+            }
+            else
+            {
+                // determine which part of the screen to redraw
+                Rectangle clearArea;
+                if (settings.rotationEffect)
+                    // due to rotation effect, increase the redraw area to catch corners
+                    clearArea = new Rectangle((int)(xPos - IconWidth * 0.5f), (int)(yPos - IconHeight * 0.5f), IconWidth * 2, IconHeight * 2);
+                else
+                    clearArea = new Rectangle((int)(xPos - IconWidth * 0.33f), (int)(yPos - IconHeight * 0.33f), (int)(IconWidth * 1.66f), (int)(IconHeight * 1.66f));
+
+                Invalidate(clearArea);
             }
             //Console.WriteLine($"Box location {this.pictureBox1.Location.X},{this.pictureBox1.Location.Y}");
             // ensure gets called again
