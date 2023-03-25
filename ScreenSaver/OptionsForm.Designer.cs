@@ -30,12 +30,15 @@
         {
             System.Windows.Forms.Label speedSliderLabel;
             System.Windows.Forms.FlowLayoutPanel mjdFlowPanel;
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OptionsForm));
+            System.Windows.Forms.Label label5;
+            System.Windows.Forms.PictureBox mjdIconPictureBox;
             System.Windows.Forms.Label label6;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OptionsForm));
+            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.mjdModeCheckBox = new System.Windows.Forms.CheckBox();
             this.showMjdIconFirstCheckbox = new System.Windows.Forms.CheckBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.generalTabPage = new System.Windows.Forms.TabPage();
             this.generalFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
@@ -69,12 +72,16 @@
             this.cancelButton = new System.Windows.Forms.Button();
             this.okButton = new System.Windows.Forms.Button();
             this.previewProcess = new System.Diagnostics.Process();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
             speedSliderLabel = new System.Windows.Forms.Label();
             mjdFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
+            label5 = new System.Windows.Forms.Label();
+            mjdIconPictureBox = new System.Windows.Forms.PictureBox();
             label6 = new System.Windows.Forms.Label();
             mjdFlowPanel.SuspendLayout();
+            this.flowLayoutPanel4.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(mjdIconPictureBox)).BeginInit();
+            this.groupBox5.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.generalTabPage.SuspendLayout();
             this.generalFlowPanel.SuspendLayout();
@@ -93,7 +100,6 @@
             this.flowLayoutPanel2.SuspendLayout();
             this.mjdTabPage.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
-            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // speedSliderLabel
@@ -113,28 +119,40 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             mjdFlowPanel.AutoSize = true;
-            mjdFlowPanel.Controls.Add(this.groupBox4);
+            mjdFlowPanel.Controls.Add(this.flowLayoutPanel4);
             mjdFlowPanel.Controls.Add(this.groupBox5);
             mjdFlowPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             mjdFlowPanel.Location = new System.Drawing.Point(0, 0);
             mjdFlowPanel.Margin = new System.Windows.Forms.Padding(0);
             mjdFlowPanel.Name = "mjdFlowPanel";
-            mjdFlowPanel.Padding = new System.Windows.Forms.Padding(8, 6, 6, 6);
+            mjdFlowPanel.Padding = new System.Windows.Forms.Padding(3);
             mjdFlowPanel.Size = new System.Drawing.Size(348, 410);
             mjdFlowPanel.TabIndex = 4;
             // 
+            // flowLayoutPanel4
+            // 
+            this.flowLayoutPanel4.AutoSize = true;
+            this.flowLayoutPanel4.Controls.Add(this.groupBox4);
+            this.flowLayoutPanel4.Controls.Add(mjdIconPictureBox);
+            this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(6, 6);
+            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(330, 166);
+            this.flowLayoutPanel4.TabIndex = 2;
+            // 
             // groupBox4
             // 
-            this.groupBox4.AutoSize = true;
+            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox4.Controls.Add(this.mjdModeCheckBox);
             this.groupBox4.Controls.Add(this.showMjdIconFirstCheckbox);
-            this.groupBox4.Controls.Add(this.label5);
-            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox4.Location = new System.Drawing.Point(11, 9);
+            this.groupBox4.Controls.Add(label5);
+            this.groupBox4.Location = new System.Drawing.Point(3, 3);
+            this.groupBox4.MinimumSize = new System.Drawing.Size(160, 160);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(6);
-            this.groupBox4.Size = new System.Drawing.Size(322, 84);
-            this.groupBox4.TabIndex = 0;
+            this.groupBox4.Size = new System.Drawing.Size(160, 160);
+            this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Michael MJD Mode";
             // 
@@ -144,14 +162,13 @@
             this.mjdModeCheckBox.Checked = true;
             this.mjdModeCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.mjdModeCheckBox.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.mjdModeCheckBox.Location = new System.Drawing.Point(6, 36);
+            this.mjdModeCheckBox.Location = new System.Drawing.Point(6, 112);
             this.mjdModeCheckBox.Name = "mjdModeCheckBox";
             this.mjdModeCheckBox.Padding = new System.Windows.Forms.Padding(4, 0, 4, 4);
-            this.mjdModeCheckBox.Size = new System.Drawing.Size(310, 21);
-            this.mjdModeCheckBox.TabIndex = 3;
+            this.mjdModeCheckBox.Size = new System.Drawing.Size(148, 21);
+            this.mjdModeCheckBox.TabIndex = 0;
             this.mjdModeCheckBox.Text = "MJD Mode enabled";
             this.mjdModeCheckBox.UseVisualStyleBackColor = true;
-            this.mjdModeCheckBox.CheckedChanged += new System.EventHandler(this.mjdModeCheckBox_CheckedChanged);
             // 
             // showMjdIconFirstCheckbox
             // 
@@ -159,25 +176,60 @@
             this.showMjdIconFirstCheckbox.Checked = true;
             this.showMjdIconFirstCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.showMjdIconFirstCheckbox.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.showMjdIconFirstCheckbox.Location = new System.Drawing.Point(6, 57);
+            this.showMjdIconFirstCheckbox.Location = new System.Drawing.Point(6, 133);
             this.showMjdIconFirstCheckbox.Name = "showMjdIconFirstCheckbox";
             this.showMjdIconFirstCheckbox.Padding = new System.Windows.Forms.Padding(4, 0, 4, 4);
-            this.showMjdIconFirstCheckbox.Size = new System.Drawing.Size(310, 21);
-            this.showMjdIconFirstCheckbox.TabIndex = 2;
+            this.showMjdIconFirstCheckbox.Size = new System.Drawing.Size(148, 21);
+            this.showMjdIconFirstCheckbox.TabIndex = 1;
             this.showMjdIconFirstCheckbox.Text = "Show MJD icon first";
             this.showMjdIconFirstCheckbox.UseVisualStyleBackColor = true;
-            this.showMjdIconFirstCheckbox.CheckedChanged += new System.EventHandler(this.showMjdIconsFirstCheckbox_CheckedChanged);
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label5.Location = new System.Drawing.Point(6, 19);
-            this.label5.Name = "label5";
-            this.label5.Padding = new System.Windows.Forms.Padding(0, 0, 0, 4);
-            this.label5.Size = new System.Drawing.Size(308, 17);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Additional icons have been unlocked, as seen on Michael MJD!";
+            label5.Dock = System.Windows.Forms.DockStyle.Top;
+            label5.Location = new System.Drawing.Point(6, 19);
+            label5.Name = "label5";
+            label5.Padding = new System.Windows.Forms.Padding(0, 0, 0, 4);
+            label5.Size = new System.Drawing.Size(148, 44);
+            label5.TabIndex = 0;
+            label5.Text = "Additional icons have been unlocked, as seen on Michael MJD!";
+            // 
+            // mjdIconPictureBox
+            // 
+            mjdIconPictureBox.Image = global::ScreenSaver.Properties.MjdResources.MJD_Icon;
+            mjdIconPictureBox.InitialImage = global::ScreenSaver.Properties.MjdResources.MJD_Icon;
+            mjdIconPictureBox.Location = new System.Drawing.Point(186, 20);
+            mjdIconPictureBox.Margin = new System.Windows.Forms.Padding(20, 20, 16, 16);
+            mjdIconPictureBox.MaximumSize = new System.Drawing.Size(128, 128);
+            mjdIconPictureBox.MinimumSize = new System.Drawing.Size(128, 128);
+            mjdIconPictureBox.Name = "mjdIconPictureBox";
+            mjdIconPictureBox.Size = new System.Drawing.Size(128, 128);
+            mjdIconPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            mjdIconPictureBox.TabIndex = 2;
+            mjdIconPictureBox.TabStop = false;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.AutoSize = true;
+            this.groupBox5.Controls.Add(label6);
+            this.groupBox5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox5.Location = new System.Drawing.Point(6, 178);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(330, 34);
+            this.groupBox5.TabIndex = 1;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "TBC";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Dock = System.Windows.Forms.DockStyle.Top;
+            label6.Location = new System.Drawing.Point(3, 16);
+            label6.Name = "label6";
+            label6.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
+            label6.Size = new System.Drawing.Size(28, 15);
+            label6.TabIndex = 3;
+            label6.Text = "TBC";
             // 
             // tabControl1
             // 
@@ -389,8 +441,8 @@
             // 
             // windowsPreviewImage
             // 
-            this.windowsPreviewImage.Image = ((System.Drawing.Image)(resources.GetObject("windowsPreviewImage.Image")));
-            this.windowsPreviewImage.InitialImage = global::ScreenSaver.Properties.Resources.ubuntu;
+            this.windowsPreviewImage.Image = global::ScreenSaver.Properties.WindowsIcons._3_0;
+            this.windowsPreviewImage.InitialImage = global::ScreenSaver.Properties.WindowsIcons._3_0;
             this.windowsPreviewImage.Location = new System.Drawing.Point(186, 20);
             this.windowsPreviewImage.Margin = new System.Windows.Forms.Padding(20, 20, 16, 16);
             this.windowsPreviewImage.MaximumSize = new System.Drawing.Size(128, 128);
@@ -439,8 +491,8 @@
             // 
             // linuxPreviewImage
             // 
-            this.linuxPreviewImage.Image = ((System.Drawing.Image)(resources.GetObject("linuxPreviewImage.Image")));
-            this.linuxPreviewImage.InitialImage = global::ScreenSaver.Properties.Resources.ubuntu;
+            this.linuxPreviewImage.Image = global::ScreenSaver.Properties.Resources.linux;
+            this.linuxPreviewImage.InitialImage = global::ScreenSaver.Properties.Resources.linux;
             this.linuxPreviewImage.Location = new System.Drawing.Point(186, 20);
             this.linuxPreviewImage.Margin = new System.Windows.Forms.Padding(20, 20, 16, 16);
             this.linuxPreviewImage.MaximumSize = new System.Drawing.Size(128, 128);
@@ -596,27 +648,6 @@
             this.previewProcess.StartInfo.WorkingDirectory = ".\\";
             this.previewProcess.SynchronizingObject = this;
             // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Dock = System.Windows.Forms.DockStyle.Top;
-            label6.Location = new System.Drawing.Point(3, 16);
-            label6.Name = "label6";
-            label6.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
-            label6.Size = new System.Drawing.Size(28, 15);
-            label6.TabIndex = 3;
-            label6.Text = "TBC";
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(label6);
-            this.groupBox5.Location = new System.Drawing.Point(11, 99);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(322, 44);
-            this.groupBox5.TabIndex = 1;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "TBC";
-            // 
             // OptionsForm
             // 
             this.AcceptButton = this.okButton;
@@ -637,8 +668,12 @@
             this.Load += new System.EventHandler(this.OptionsForm_Load);
             mjdFlowPanel.ResumeLayout(false);
             mjdFlowPanel.PerformLayout();
+            this.flowLayoutPanel4.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(mjdIconPictureBox)).EndInit();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.generalTabPage.ResumeLayout(false);
             this.generalTabPage.PerformLayout();
@@ -665,8 +700,6 @@
             this.mjdTabPage.ResumeLayout(false);
             this.mjdTabPage.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -702,14 +735,14 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.CheckedListBox WindowsIconsCheckList;
-        private System.Windows.Forms.PictureBox windowsPreviewImage;
         private System.Windows.Forms.TabPage mjdTabPage;
         private System.Windows.Forms.LinkLabel mjdLabel;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.CheckBox showMjdIconFirstCheckbox;
-        private System.Windows.Forms.CheckBox mjdModeCheckBox;
         private System.Windows.Forms.CheckBox trailsCheckBox;
         private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.CheckBox mjdModeCheckBox;
+        private System.Windows.Forms.CheckBox showMjdIconFirstCheckbox;
+        private System.Windows.Forms.PictureBox windowsPreviewImage;
     }
 }
