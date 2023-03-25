@@ -225,7 +225,7 @@ namespace ScreenSaver
             graphics.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceCopy;
             graphics.DrawImage(images[imageIndex], 0, 0, IconWidth, IconHeight);
             graphics.ResetTransform();
-            if (settings.mjdMode) // todo more checks, only show while is previewing
+            if (settings.mjdMode && !previewMode && settings.showMjdDellLcdFrame) // todo more checks, only show while is previewing
             {
                 graphics.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceOver;
                 graphics.DrawImage(dellMonitorFrameImage, 0, 0, Width, Height);
@@ -296,7 +296,7 @@ namespace ScreenSaver
                 // determine which part of the screen to redraw
                 Rectangle clearArea;
                 if (settings.iconTrailsEffect)
-                    clearArea = new Rectangle(xPos, yPos, (int)(IconWidth * 0.9f), (int)(IconHeight * 0.9f));
+                    clearArea = new Rectangle(xPos + speed.X / 2, yPos + speed.Y / 2, IconWidth - speed.X, IconHeight - speed.Y);
                 else if (settings.rotationEffect)
                     // due to rotation effect, increase the redraw area to catch corners
                     clearArea = new Rectangle((int)(xPos - IconWidth * 0.5f), (int)(yPos - IconHeight * 0.5f), IconWidth * 2, IconHeight * 2);

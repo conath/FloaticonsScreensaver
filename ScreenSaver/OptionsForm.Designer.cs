@@ -72,6 +72,7 @@
             this.cancelButton = new System.Windows.Forms.Button();
             this.okButton = new System.Windows.Forms.Button();
             this.previewProcess = new System.Diagnostics.Process();
+            this.mjdShowLCDFrameCheckBox = new System.Windows.Forms.CheckBox();
             speedSliderLabel = new System.Windows.Forms.Label();
             mjdFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
             label5 = new System.Windows.Forms.Label();
@@ -147,6 +148,7 @@
             this.groupBox4.Controls.Add(this.mjdModeCheckBox);
             this.groupBox4.Controls.Add(this.showMjdIconFirstCheckbox);
             this.groupBox4.Controls.Add(label5);
+            this.groupBox4.Controls.Add(this.mjdShowLCDFrameCheckBox);
             this.groupBox4.Location = new System.Drawing.Point(3, 3);
             this.groupBox4.MinimumSize = new System.Drawing.Size(160, 160);
             this.groupBox4.Name = "groupBox4";
@@ -162,7 +164,7 @@
             this.mjdModeCheckBox.Checked = true;
             this.mjdModeCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.mjdModeCheckBox.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.mjdModeCheckBox.Location = new System.Drawing.Point(6, 112);
+            this.mjdModeCheckBox.Location = new System.Drawing.Point(6, 91);
             this.mjdModeCheckBox.Name = "mjdModeCheckBox";
             this.mjdModeCheckBox.Padding = new System.Windows.Forms.Padding(4, 0, 4, 4);
             this.mjdModeCheckBox.Size = new System.Drawing.Size(148, 21);
@@ -176,7 +178,7 @@
             this.showMjdIconFirstCheckbox.Checked = true;
             this.showMjdIconFirstCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.showMjdIconFirstCheckbox.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.showMjdIconFirstCheckbox.Location = new System.Drawing.Point(6, 133);
+            this.showMjdIconFirstCheckbox.Location = new System.Drawing.Point(6, 112);
             this.showMjdIconFirstCheckbox.Name = "showMjdIconFirstCheckbox";
             this.showMjdIconFirstCheckbox.Padding = new System.Windows.Forms.Padding(4, 0, 4, 4);
             this.showMjdIconFirstCheckbox.Size = new System.Drawing.Size(148, 21);
@@ -648,6 +650,19 @@
             this.previewProcess.StartInfo.WorkingDirectory = ".\\";
             this.previewProcess.SynchronizingObject = this;
             // 
+            // mjdShowLCDFrameCheckBox
+            // 
+            this.mjdShowLCDFrameCheckBox.AutoSize = true;
+            this.mjdShowLCDFrameCheckBox.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.mjdShowLCDFrameCheckBox.Location = new System.Drawing.Point(6, 133);
+            this.mjdShowLCDFrameCheckBox.Name = "mjdShowLCDFrameCheckBox";
+            this.mjdShowLCDFrameCheckBox.Padding = new System.Windows.Forms.Padding(4, 0, 4, 4);
+            this.mjdShowLCDFrameCheckBox.Size = new System.Drawing.Size(148, 21);
+            this.mjdShowLCDFrameCheckBox.TabIndex = 2;
+            this.mjdShowLCDFrameCheckBox.Text = "Show Dell LCD Frame";
+            this.mjdShowLCDFrameCheckBox.UseVisualStyleBackColor = true;
+            this.mjdShowLCDFrameCheckBox.CheckedChanged += new System.EventHandler(this.mjdShowLCDFrameCheckBox_CheckedChanged);
+            // 
             // OptionsForm
             // 
             this.AcceptButton = this.okButton;
@@ -744,5 +759,6 @@
         private System.Windows.Forms.CheckBox mjdModeCheckBox;
         private System.Windows.Forms.CheckBox showMjdIconFirstCheckbox;
         private System.Windows.Forms.PictureBox windowsPreviewImage;
+        private System.Windows.Forms.CheckBox mjdShowLCDFrameCheckBox;
     }
 }

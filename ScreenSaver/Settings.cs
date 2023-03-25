@@ -15,9 +15,9 @@ namespace ScreenSaver
 
         public bool mjdMode = false;
         public bool showMjdIconFirst = true;
+        public bool showMjdDellLcdFrame = false;
 
         private Dictionary<string, bool> iconEnableState = new Dictionary<string, bool>();
-
         private const bool IconDefaultState = true;
         #endregion
 
@@ -31,6 +31,7 @@ namespace ScreenSaver
         private const string NAME_YMOVE = "YMovement";
         private const string NAME_MJD_MODE = "EnableMjdMode";
         private const string NAME_MJD_FIRST = "ShowMjdFirst";
+        private const string NAME_MJD_DELL_LCD = "ShowDellLcdFrame";
 
         private Settings()
         { }
@@ -92,6 +93,7 @@ namespace ScreenSaver
                 {
                     instance.mjdMode = (int)key.GetValue(NAME_MJD_MODE, 0) == 1;
                     instance.showMjdIconFirst = (int)key.GetValue(NAME_MJD_FIRST, 1) == 1;
+                    instance.showMjdDellLcdFrame = (int)key.GetValue(NAME_MJD_DELL_LCD, 0) == 1;
                 }
             }
 
@@ -157,6 +159,7 @@ namespace ScreenSaver
                 RegistryKey mjdKey = Registry.CurrentUser.CreateSubKey(REGISTRY_SUBKEY + MJD_SUBKEY);
                 mjdKey.SetValue(NAME_MJD_MODE, mjdMode ? 1 : 0);
                 mjdKey.SetValue(NAME_MJD_FIRST, showMjdIconFirst ? 1 : 0);
+                mjdKey.SetValue(NAME_MJD_DELL_LCD, showMjdDellLcdFrame ? 1 : 0);
                 mjdKey.Close();
             }
             SaveMainSettings();

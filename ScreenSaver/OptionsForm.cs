@@ -168,5 +168,10 @@ namespace ScreenSaver
 
             settings.iconTrailsEffect = trailsCheckBox.Checked;
         }
+
+        private void mjdShowLCDFrameCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            settings.showMjdDellLcdFrame = mjdShowLCDFrameCheckBox.Checked;
+        }
     }
 }
