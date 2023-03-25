@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using Timer = System.Threading.Timer;
 
 namespace ScreenSaver
 {
@@ -27,6 +28,10 @@ namespace ScreenSaver
         private int numberOfImages = 0;
         private readonly int screenNumber;
         private readonly bool previewMode;
+        private Timer timer;
+
+        private delegate void TimerTickDelegate();
+        private TimerTickDelegate timerTickDelegate;
 
         public ScreenSaverForm(int scrn)
         {
@@ -102,8 +107,9 @@ namespace ScreenSaver
                 TopMost = true;
             }
 
-            timer.Tick += Timer1_Tick;
-            timer.Start();
+            timerTickDelegate = new TimerTickDelegate(TimerTick);
+            // System.Threading.Timer
+            timer = new Timer(Timer_Tick, null, dueTime: 100, period: 16);
             Randomize();
             delayTicks = 0;
             // MJD feature: show MJD icon first
@@ -116,6 +122,12 @@ namespace ScreenSaver
                 else
                     Console.Error.WriteLine("MJD Mode ShowMjdFirst is broken");
             }
+        }
+
+        private void Timer_Tick(object state)
+        {
+            // is not on right thread, so invoke the delegate
+            Invoke(timerTickDelegate);
         }
 
         private void OnMouseEvent(object sender, MouseEventArgs e)
@@ -139,6 +151,12 @@ namespace ScreenSaver
             }
         }
 
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+            timer.Dispose();
+        }
+
         #region Windows Form Designer generated code
         /// <summary>
         /// Required method for Designer support - do not modify
@@ -146,13 +164,7 @@ namespace ScreenSaver
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.timer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
-            // 
-            // timer1
-            // 
-            this.timer.Interval = 16;
             // 
             // ScreenSaverForm
             // 
@@ -256,7 +268,7 @@ namespace ScreenSaver
                 DelaySeconds = random.Next(6);
         }
 
-        private void Timer1_Tick(object sender, EventArgs e)
+        private void TimerTick()
         {
             if (delayTicks > 0)
             {
@@ -291,9 +303,8 @@ namespace ScreenSaver
 
                 Invalidate(clearArea);
             }
-            //Console.WriteLine($"Box location {this.pictureBox1.Location.X},{this.pictureBox1.Location.Y}");
             // ensure gets called again
-            Refresh();
+            Update();
         }
     }
 }
