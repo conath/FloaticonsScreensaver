@@ -295,7 +295,9 @@ namespace ScreenSaver
             {
                 // determine which part of the screen to redraw
                 Rectangle clearArea;
-                if (settings.rotationEffect)
+                if (settings.iconTrailsEffect)
+                    clearArea = new Rectangle(xPos, yPos, (int)(IconWidth * 0.9f), (int)(IconHeight * 0.9f));
+                else if (settings.rotationEffect)
                     // due to rotation effect, increase the redraw area to catch corners
                     clearArea = new Rectangle((int)(xPos - IconWidth * 0.5f), (int)(yPos - IconHeight * 0.5f), IconWidth * 2, IconHeight * 2);
                 else

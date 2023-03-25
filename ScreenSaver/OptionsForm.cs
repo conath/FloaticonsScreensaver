@@ -17,6 +17,7 @@ namespace ScreenSaver
         private void OptionsForm_Load(object sender, EventArgs e)
         {
             rotationEffectCheckBox.Checked = settings.rotationEffect;
+            trailsCheckBox.Checked = settings.iconTrailsEffect;
             verticalMovementCheckBox.Checked = settings.moveY;
             animationSpeedSlider.Value = settings.moveSpeedX;
             LinuxIconsCheckList.Items.AddRange(Strings.LinuxIconNames);
@@ -160,6 +161,12 @@ namespace ScreenSaver
         private void showMjdIconsFirstCheckbox_CheckedChanged(object sender, EventArgs e)
         {
             settings.showMjdIconFirst = showMjdIconFirstCheckbox.Checked;
+        }
+
+        private void iconTrailsEffect_CheckedChanged(object sender, EventArgs e)
+        {
+
+            settings.iconTrailsEffect = trailsCheckBox.Checked;
         }
     }
 }

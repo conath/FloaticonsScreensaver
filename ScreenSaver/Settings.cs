@@ -9,6 +9,7 @@ namespace ScreenSaver
     {
         #region Settings data
         public bool rotationEffect = true;
+        public bool iconTrailsEffect = false;
         public int moveSpeedX = 9; // range 0-10
         public bool moveY = true;
 
@@ -25,6 +26,7 @@ namespace ScreenSaver
         private const string ICONS_SUBKEY = "\\Icon State";
         private const string MJD_SUBKEY = "\\MJD";
         private const string NAME_ROTATION = "RotationEffect";
+        private const string NAME_TRAILS = "TrailsEffect";
         private const string NAME_XSPEED = "XMovementSpeed";
         private const string NAME_YMOVE = "YMovement";
         private const string NAME_MJD_MODE = "EnableMjdMode";
@@ -48,6 +50,7 @@ namespace ScreenSaver
                 {
                     // read settings
                     instance.rotationEffect = (int)key.GetValue(NAME_ROTATION, 1) == 1;
+                    instance.iconTrailsEffect = (int)key.GetValue(NAME_TRAILS, 0) == 1;
                     instance.moveSpeedX = (int)key.GetValue(NAME_XSPEED, 1);
                     instance.moveY = (int)key.GetValue(NAME_YMOVE, 1) == 1;
                 }
@@ -135,6 +138,7 @@ namespace ScreenSaver
             {
                 RegistryKey mainKey = Registry.CurrentUser.CreateSubKey(REGISTRY_SUBKEY);
                 mainKey.SetValue(NAME_ROTATION, rotationEffect ? 1 : 0);
+                mainKey.SetValue(NAME_TRAILS, iconTrailsEffect ? 1 : 0);
                 mainKey.SetValue(NAME_XSPEED, moveSpeedX);
                 mainKey.SetValue(NAME_YMOVE, moveY ? 1 : 0);
                 mainKey.Close();

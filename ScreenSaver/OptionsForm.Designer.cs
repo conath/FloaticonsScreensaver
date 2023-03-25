@@ -46,6 +46,7 @@
             this.animationSpeedSlider = new System.Windows.Forms.TrackBar();
             this.verticalMovementCheckBox = new System.Windows.Forms.CheckBox();
             this.rotationEffectCheckBox = new System.Windows.Forms.CheckBox();
+            this.trailsCheckBox = new System.Windows.Forms.CheckBox();
             this.iconsTabPage = new System.Windows.Forms.TabPage();
             this.iconsFlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
@@ -68,9 +69,6 @@
             this.cancelButton = new System.Windows.Forms.Button();
             this.okButton = new System.Windows.Forms.Button();
             this.previewProcess = new System.Diagnostics.Process();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             speedSliderLabel = new System.Windows.Forms.Label();
             mjdFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
@@ -95,7 +93,6 @@
             this.flowLayoutPanel2.SuspendLayout();
             this.mjdTabPage.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -265,9 +262,10 @@
             this.groupBox2.Controls.Add(this.animationSpeedSlider);
             this.groupBox2.Controls.Add(this.verticalMovementCheckBox);
             this.groupBox2.Controls.Add(this.rotationEffectCheckBox);
+            this.groupBox2.Controls.Add(this.trailsCheckBox);
             this.groupBox2.Location = new System.Drawing.Point(11, 73);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(322, 119);
+            this.groupBox2.Size = new System.Drawing.Size(322, 152);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Animation";
@@ -278,11 +276,11 @@
             this.animationSpeedSlider.BackColor = System.Drawing.SystemColors.Window;
             this.animationSpeedSlider.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.animationSpeedSlider.LargeChange = 2;
-            this.animationSpeedSlider.Location = new System.Drawing.Point(3, 31);
+            this.animationSpeedSlider.Location = new System.Drawing.Point(3, 39);
             this.animationSpeedSlider.Margin = new System.Windows.Forms.Padding(0);
             this.animationSpeedSlider.Name = "animationSpeedSlider";
             this.animationSpeedSlider.Size = new System.Drawing.Size(316, 39);
-            this.animationSpeedSlider.TabIndex = 2;
+            this.animationSpeedSlider.TabIndex = 0;
             this.animationSpeedSlider.Value = 9;
             this.animationSpeedSlider.Scroll += new System.EventHandler(this.animationSpeedSlider_Scroll);
             // 
@@ -292,7 +290,7 @@
             this.verticalMovementCheckBox.Checked = true;
             this.verticalMovementCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.verticalMovementCheckBox.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.verticalMovementCheckBox.Location = new System.Drawing.Point(3, 70);
+            this.verticalMovementCheckBox.Location = new System.Drawing.Point(3, 78);
             this.verticalMovementCheckBox.Name = "verticalMovementCheckBox";
             this.verticalMovementCheckBox.Padding = new System.Windows.Forms.Padding(4, 0, 4, 4);
             this.verticalMovementCheckBox.Size = new System.Drawing.Size(316, 21);
@@ -307,14 +305,27 @@
             this.rotationEffectCheckBox.Checked = true;
             this.rotationEffectCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.rotationEffectCheckBox.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.rotationEffectCheckBox.Location = new System.Drawing.Point(3, 91);
+            this.rotationEffectCheckBox.Location = new System.Drawing.Point(3, 99);
             this.rotationEffectCheckBox.Name = "rotationEffectCheckBox";
             this.rotationEffectCheckBox.Padding = new System.Windows.Forms.Padding(4);
             this.rotationEffectCheckBox.Size = new System.Drawing.Size(316, 25);
-            this.rotationEffectCheckBox.TabIndex = 0;
+            this.rotationEffectCheckBox.TabIndex = 2;
             this.rotationEffectCheckBox.Text = "Rotation (icons will rotate slightly as they fly across)";
             this.rotationEffectCheckBox.UseVisualStyleBackColor = true;
             this.rotationEffectCheckBox.CheckedChanged += new System.EventHandler(this.rotationEffect_CheckedChanged);
+            // 
+            // trailsCheckBox
+            // 
+            this.trailsCheckBox.AutoSize = true;
+            this.trailsCheckBox.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.trailsCheckBox.Location = new System.Drawing.Point(3, 124);
+            this.trailsCheckBox.Name = "trailsCheckBox";
+            this.trailsCheckBox.Padding = new System.Windows.Forms.Padding(4);
+            this.trailsCheckBox.Size = new System.Drawing.Size(316, 25);
+            this.trailsCheckBox.TabIndex = 3;
+            this.trailsCheckBox.Text = "Trails (icons will leave trails as they fly across)";
+            this.trailsCheckBox.UseVisualStyleBackColor = true;
+            this.trailsCheckBox.CheckedChanged += new System.EventHandler(this.iconTrailsEffect_CheckedChanged);
             // 
             // iconsTabPage
             // 
@@ -585,47 +596,6 @@
             this.previewProcess.StartInfo.WorkingDirectory = ".\\";
             this.previewProcess.SynchronizingObject = this;
             // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Checked = true;
-            this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.checkBox2.Location = new System.Drawing.Point(3, 91);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Padding = new System.Windows.Forms.Padding(4);
-            this.checkBox2.Size = new System.Drawing.Size(316, 25);
-            this.checkBox2.TabIndex = 0;
-            this.checkBox2.Text = "Rotation (icons will rotate slightly as they fly across)";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Checked = true;
-            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.checkBox1.Location = new System.Drawing.Point(3, 70);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Padding = new System.Windows.Forms.Padding(4, 0, 4, 4);
-            this.checkBox1.Size = new System.Drawing.Size(316, 21);
-            this.checkBox1.TabIndex = 1;
-            this.checkBox1.Text = "Move diagonally (icons will move on tilted/diagonal paths)";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // trackBar1
-            // 
-            this.trackBar1.AutoSize = false;
-            this.trackBar1.BackColor = System.Drawing.SystemColors.Window;
-            this.trackBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.trackBar1.LargeChange = 2;
-            this.trackBar1.Location = new System.Drawing.Point(3, 31);
-            this.trackBar1.Margin = new System.Windows.Forms.Padding(0);
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(316, 39);
-            this.trackBar1.TabIndex = 2;
-            this.trackBar1.Value = 9;
-            // 
             // label6
             // 
             label6.AutoSize = true;
@@ -633,22 +603,19 @@
             label6.Location = new System.Drawing.Point(3, 16);
             label6.Name = "label6";
             label6.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
-            label6.Size = new System.Drawing.Size(91, 15);
+            label6.Size = new System.Drawing.Size(28, 15);
             label6.TabIndex = 3;
-            label6.Text = "Movement Speed";
+            label6.Text = "TBC";
             // 
             // groupBox5
             // 
             this.groupBox5.Controls.Add(label6);
-            this.groupBox5.Controls.Add(this.trackBar1);
-            this.groupBox5.Controls.Add(this.checkBox1);
-            this.groupBox5.Controls.Add(this.checkBox2);
             this.groupBox5.Location = new System.Drawing.Point(11, 99);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(322, 119);
+            this.groupBox5.Size = new System.Drawing.Size(322, 44);
             this.groupBox5.TabIndex = 1;
             this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Animation";
+            this.groupBox5.Text = "TBC";
             // 
             // OptionsForm
             // 
@@ -698,7 +665,6 @@
             this.mjdTabPage.ResumeLayout(false);
             this.mjdTabPage.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
@@ -743,9 +709,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.CheckBox showMjdIconFirstCheckbox;
         private System.Windows.Forms.CheckBox mjdModeCheckBox;
+        private System.Windows.Forms.CheckBox trailsCheckBox;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.TrackBar trackBar1;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox2;
     }
 }
