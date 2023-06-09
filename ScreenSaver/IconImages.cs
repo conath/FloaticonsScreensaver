@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Collections.Generic;
 
 namespace ScreenSaver
 {
@@ -6,6 +7,7 @@ namespace ScreenSaver
     {
         private static Image[] _allImages;
         private static Image[] _allImagesMjd;
+        private static Image[] _onlyMjdImages;
 
         public static Image[] GetAllImages(bool includeMjd = true)
         {
@@ -123,5 +125,21 @@ namespace ScreenSaver
             Properties.MjdTechBrandsIcons.Nintendo,
             Properties.MjdTechBrandsIcons.Packard_Bell
         };
+
+        public static Image[] AllMjdImages
+        {
+            get
+            {
+                if (_onlyMjdImages == null)
+                {
+                    var list = new List<Image>();
+                    list.AddRange(MjdImages);
+                    list.AddRange(MjdSoftwareServicesImages);
+                    list.AddRange(MjdTechBrandsImages);
+                    _onlyMjdImages = list.ToArray();
+                }
+                return _onlyMjdImages;
+            }
+        }
     }
 }

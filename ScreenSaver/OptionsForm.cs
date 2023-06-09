@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace ScreenSaver
@@ -7,6 +9,7 @@ namespace ScreenSaver
     public partial class OptionsForm : Form
     {
         private Settings settings;
+        private string[] allMjdStrings;
 
         public OptionsForm()
         {
@@ -35,8 +38,23 @@ namespace ScreenSaver
             WindowsIconsCheckList.ItemCheck += WindowsIconsCheckedListBox_ItemCheck;
             // hide mjd button by default, unless MJD mode is enabled
             if (!settings.mjdMode) tabControl1.TabPages.Remove(mjdTabPage);
+            // setup MJD page
+            mjdModeCheckBox.Checked = settings.mjdMode;
+            showMjdIconFirstCheckbox.Checked = settings.showMjdIconFirst;
+            mjdShowLCDFrameCheckBox.Checked = settings.showMjdDellLcdFrame;
+            var allMjdStringsList = new List<string>(Strings.MjdIconNames);
+            allMjdStringsList.AddRange(Strings.MjdSoftwareServicesIconNames);
+            allMjdStringsList.AddRange(Strings.MjdTechBrandsIconNames);
+            allMjdStrings = allMjdStringsList.ToArray();
+            MjdIconsCheckedList.Items.AddRange(allMjdStrings);
+            for (int i = 0; i < allMjdStrings.Length; i++)
+            {
+                MjdIconsCheckedList.SetItemChecked(i, settings.IsIconEnabled(allMjdStrings[i]));
+            }
+            MjdIconsCheckedList.ItemCheck += NjdIconsCheckedListBox_ItemCheck;
+            dellMonitorImageBox.Visible = settings.showMjdDellLcdFrame;
         }
-        
+
         private void VisitLink()
         {
             // Change the color of the link text by setting LinkVisited
@@ -150,17 +168,8 @@ namespace ScreenSaver
                 // reveal MJD tab
                 tabControl1.TabPages.Add(mjdTabPage);
                 settings.mjdMode = true;
+                mjdModeCheckBox.Checked = true;
             }
-        }
-
-        private void mjdModeCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            settings.mjdMode = mjdModeCheckBox.Checked;
-        }
-
-        private void showMjdIconsFirstCheckbox_CheckedChanged(object sender, EventArgs e)
-        {
-            settings.showMjdIconFirst = showMjdIconFirstCheckbox.Checked;
         }
 
         private void iconTrailsEffect_CheckedChanged(object sender, EventArgs e)
@@ -172,6 +181,42 @@ namespace ScreenSaver
         private void mjdShowLCDFrameCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             settings.showMjdDellLcdFrame = mjdShowLCDFrameCheckBox.Checked;
+            dellMonitorImageBox.Visible = settings.showMjdDellLcdFrame;
+        }
+
+        private void MjdIconsCheckedList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var index = MjdIconsCheckedList.SelectedIndex;
+            mjdSelectedIconBox.Image = IconImages.AllMjdImages[index];
+            // some images require grey bg
+            const int windowsWhistlerIndex = 14;
+            const int hpWhiteIndex = 24;
+            if (index == windowsWhistlerIndex || index == hpWhiteIndex)
+            {
+                // needs gray bg
+                mjdSelectedIconBox.BackColor = Color.Gainsboro;
+            }
+            else
+            {
+                // transparent bg
+                mjdSelectedIconBox.BackColor = Color.Transparent;
+            }
+        }
+
+        private void NjdIconsCheckedListBox_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            var index = MjdIconsCheckedList.SelectedIndex;
+            settings.SetIconEnabled(allMjdStrings[index], e.NewValue == CheckState.Checked);
+        }
+
+        private void showMjdIconFirstCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            settings.showMjdIconFirst = showMjdIconFirstCheckbox.Checked;
+        }
+
+        private void mjdModeCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            settings.mjdMode = mjdModeCheckBox.Checked;
         }
     }
 }
