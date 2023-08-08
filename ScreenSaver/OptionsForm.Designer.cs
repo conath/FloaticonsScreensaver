@@ -617,7 +617,7 @@
             this.label1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 4);
             this.label1.Size = new System.Drawing.Size(219, 17);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Floaticons © 2022-2023 Christoph Parstorfer.";
+            this.label1.Text = "Floaticons © 2022-2023 Christoph Quirin Parstorfer.";
             // 
             // linkLabel1
             // 
